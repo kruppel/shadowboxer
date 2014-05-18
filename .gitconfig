@@ -19,7 +19,7 @@
   whitespace = red reverse
 [core]
   whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
-  excludesfile = /Users/kruppel/.gitignore
+  excludesfile = ~/.gitignore
 [alias]
   amend = commit --amend --no-edit
   curr = symbolic-ref -q HEAD --short

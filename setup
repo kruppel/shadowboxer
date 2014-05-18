@@ -1,0 +1,30 @@
+#!/bin/sh
+
+working_dir=$(pwd)
+
+if [ $(uname -s) = 'Darwin' ]
+then
+  PACKAGE_MGR='brew'
+else
+  PACKAGE_MGR='apt-get'
+fi
+
+echo "\033[0;34mSetting up zprezto...\033[0m"
+
+if [ -d '.zprezto' ]
+then
+  cd .zprezto && git pull -q && cd $working_dir
+else
+  git clone --recursive https://github.com/sorin-ionescu/prezto.git .zprezto
+fi
+
+rsync --exclude ".git/" --exclude ".DS_Store" --exclude "setup" --exclude "vm" \
+-av --no-perms -q . ~
+
+zsh -c "setopt EXTENDED_GLOB; \
+  for rcfile in "\${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do \
+    rm "\${ZDOTDIR:-$HOME}/.\${rcfile:t}"; \
+    ln -s "\$rcfile" "\${ZDOTDIR:-$HOME}/.\${rcfile:t}"; \
+  done"
+
+chsh -s $(which zsh)
