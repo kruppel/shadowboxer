@@ -18,13 +18,22 @@ else
   git clone --recursive https://github.com/sorin-ionescu/prezto.git .zprezto
 fi
 
+if [ -d '~/.vim/bundle/Vundle.vim' ]
+then
+  cd .vundle && git pull -q && cd $working_dir
+else
+  git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+fi
+
 rsync --exclude ".git/" --exclude ".DS_Store" --exclude "setup" --exclude "vm" \
 -av --no-perms -q . ~
 
 zsh -c "setopt EXTENDED_GLOB; \
   for rcfile in "\${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do \
-    rm "\${ZDOTDIR:-$HOME}/.\${rcfile:t}"; \
+    rm -f "\${ZDOTDIR:-$HOME}/.\${rcfile:t}"; \
     ln -s "\$rcfile" "\${ZDOTDIR:-$HOME}/.\${rcfile:t}"; \
   done"
+
+vim +PluginInstall +qall
 
 chsh -s $(which zsh)
