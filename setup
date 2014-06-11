@@ -6,28 +6,34 @@ if [ $(uname -s) = 'Darwin' ]
 then
   PACKAGE_MGR='brew'
 else
-  PACKAGE_MGR='apt-get'
-fi
-
-echo "\033[0;34mSetting up zprezto...\033[0m"
-
-if [ -d '.zprezto' ]
-then
-  cd .zprezto && git pull -q && cd $working_dir
-else
-  git clone --recursive https://github.com/sorin-ionescu/prezto.git .zprezto
-fi
-
-if [ -d '~/.vim/bundle/Vundle.vim' ]
-then
-  cd .vundle && git pull -q && cd $working_dir
-else
-  git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  PACKAGE_MGR='sudo apt-get'
 fi
 
 rsync --exclude ".git/" --exclude ".DS_Store" --exclude "setup" --exclude "vm" \
 -av --no-perms -q . ~
 
-vim +PluginInstall +qall
+echo "\033[0;34mInstalling dependencies...\033[0m"
 
-chsh -s $(which zsh)
+command -v zsh >> /dev/null 2>&1 || $PACKAGE_MGR install zsh && chsh -s $(which zsh)
+command -v git >> /dev/null 2>&1 || $PACKAGE_MGR install git
+command -v vim >> /dev/null 2>&1 || $PACKAGE_MGR install vim
+
+echo "\033[0;34mSetting up zprezto...\033[0m"
+
+if [ -d $HOME/.zprezto ]
+then
+  cd $HOME/.zprezto && git pull -q && cd $working_dir
+else
+  git clone --recursive https://github.com/sorin-ionescu/prezto.git $HOME/.zprezto
+fi
+
+echo "\033[0;34mSetting up Vundle...\033[0m"
+
+if [ -d $HOME/.vim/bundle/Vundle.vim ]
+then
+  cd $HOME/.vim/bundle/Vundle.vim && git pull -q && cd $working_dir
+else
+  git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+fi
+
+vim +PluginInstall +qall

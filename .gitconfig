@@ -26,6 +26,8 @@
   purr = pull --rebase
   fresh = "!fresh() { curr=`git curr`;git stash;git co master;git purr;git co $curr; git rebase master; };fresh"
   last = "!last() { git for-each-ref --sort=-committerdate refs/heads/; };last | sed -e 's/^.*refs\\/heads\\/\\(.*\\)$/\\1/g' | head -5"
+  masterp = !git co master && git pull --rebase
+  at = config user.email
   st = status
   ci = commit
   bl = blame
@@ -45,6 +47,6 @@
   ign = ls-files -o -i --exclude-standard
 [user]
   name = Kurt Ruppel
-  email = kruppel@zendesk.com
+  email = (none)
 [grep]
-	extendRegexp = true
+  extendRegexp = true
