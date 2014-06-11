@@ -3,5 +3,5 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
   config.vm.network "private_network", ip: (ENV["PRIVATE_NETWORK"] || "192.168.50.6")
-  config.vm.synced_folder "..", "/dotfiles", type: 'nfs', mount_options: ['nolock,vers=3,udp']
+  config.vm.synced_folder "..", "/shadowboxer", type: 'nfs', mount_options: ['nolock,vers=3,udp']
 end
