@@ -37,3 +37,17 @@ else
 fi
 
 vim +PluginInstall +qall
+
+echo "\033[0;34mSetting up z...\033[0m"
+
+mkdir -p $HOME/.shadowboxes
+
+if [ -d $HOME/bin/z.sh ]
+then
+  cd $HOME/.shadowboxes/z && git pull -q && cd $working_dir
+else
+  git clone https://github.com/rupa/z.git $HOME/.shadowboxes/z
+  cd $HOME/.shadowboxes/z && \
+    ln -s z.sh /usr/local/bin/z.sh && \
+    ln -s z.1 /usr/local/man/z.1
+fi
