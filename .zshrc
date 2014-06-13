@@ -3,3 +3,5 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 . ~/.aliases
+
+prompt peepcode ❯
