@@ -49,4 +49,16 @@ else
   git clone https://github.com/rupa/z.git $HOME/.shadowboxes/z
   cd $HOME/bin && ln -s $HOME/.shadowboxes/z/z.sh z.sh
   cd $HOME/man && ln -s $HOME/.shadowboxes/z/z.1 z.1
+  source $HOME/bin/z.sh
+fi
+
+echo "\033[0;34mSetting up nvm...\033[0m"
+
+if [ -d $HOME/.shadowboxes/nvm ]
+then
+  cd $HOME/.shadowboxes/nvm && git pull -q && cd $working_dir
+else
+  git clone https://github.com/creationix/nvm.git $HOME/.shadowboxes/nvm
+  cd $HOME/bin && ln -s $HOME/.shadowboxes/nvm/nvm.sh nvm.sh
+  source $HOME/bin/nvm.sh
 fi
