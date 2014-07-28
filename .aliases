@@ -1,2 +1,3 @@
 alias bx="bundle exec"
+alias rake="noglob rake"
 alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
