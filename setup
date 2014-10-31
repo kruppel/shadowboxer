@@ -18,20 +18,11 @@ command -v git >> /dev/null 2>&1 || $PACKAGE_MGR install git
 command -v zsh >> /dev/null 2>&1 || $PACKAGE_MGR install zsh && chsh -s $(which zsh)
 command -v vim >> /dev/null 2>&1 || $PACKAGE_MGR install vim
 
-echo "\033[0;34mSetting up zprezto...\033[0m"
-
-if [ -d $HOME/.zprezto ]
-then
-  cd $HOME/.zprezto && git pull -q && cd $working_dir
-else
-  git clone --recursive https://github.com/sorin-ionescu/prezto.git $HOME/.zprezto
-fi
-
 echo "\033[0;34mSetting up Vundle...\033[0m"
 
 if [ -d $HOME/.vim/bundle/Vundle.vim ]
 then
-  cd $HOME/.vim/bundle/Vundle.vim && git pull -q && cd $working_dir
+  (cd $HOME/.vim/bundle/Vundle.vim; git pull -q)
 else
   git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 fi
@@ -44,22 +35,21 @@ mkdir -p $HOME/.shadowboxes $HOME/bin $HOME/man
 
 if [ -d $HOME/.shadowboxes/z ]
 then
-  cd $HOME/.shadowboxes/z && git pull -q && cd $working_dir
+  (cd $HOME/.shadowboxes/z; git pull -q)
 else
   git clone https://github.com/rupa/z.git $HOME/.shadowboxes/z
-  cd $HOME/bin && ln -s $HOME/.shadowboxes/z/z.sh z.sh
-  cd $HOME/man && ln -s $HOME/.shadowboxes/z/z.1 z.1
+  (cd $HOME/bin; ln -s $HOME/.shadowboxes/z/z.sh z.sh)
+  (cd $HOME/man; ln -s $HOME/.shadowboxes/z/z.1 z.1)
   touch $HOME/.z
   source $HOME/bin/z.sh
 fi
 
-echo "\033[0;34mSetting up nvm...\033[0m"
+echo "\033[0;34mSetting up n...\033[0m"
 
-if [ -d $HOME/.shadowboxes/nvm ]
+if [ -d $HOME/.shadowboxes/n ]
 then
-  cd $HOME/.shadowboxes/nvm && git pull -q && cd $working_dir
+  (cd $HOME/.shadowboxes/n; git pull -q)
 else
-  git clone https://github.com/creationix/nvm.git $HOME/.shadowboxes/nvm
-  cd $HOME/bin && ln -s $HOME/.shadowboxes/nvm/nvm.sh nvm.sh
-  source $HOME/bin/nvm.sh
+  https://github.com/tj/n.git $HOME/.shadowboxes/n
+  (cd $HOME/.shadowboxes/n; make install)
 fi
