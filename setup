@@ -1,8 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 
-working_dir=$(pwd)
+WORKING_DIR=$(pwd)
+[ $(uname -s) = 'Darwin' ] && IS_MAC=1 || IS_MAC=0
 
-if [ $(uname -s) = 'Darwin' ]
+if [ $IS_MAC = 1 ]
 then
   PACKAGE_MGR='brew'
 else
@@ -15,6 +16,7 @@ rsync --exclude ".git/" --exclude ".DS_Store" --exclude "setup" --exclude "vm" \
 echo "\033[0;34mInstalling dependencies...\033[0m"
 
 command -v git >> /dev/null 2>&1 || $PACKAGE_MGR install git
+command -v curl >> /dev/null 2>&1 || $PACKAGE_MGR install curl && chsh -s $(which curl)
 command -v zsh >> /dev/null 2>&1 || $PACKAGE_MGR install zsh && chsh -s $(which zsh)
 command -v vim >> /dev/null 2>&1 || $PACKAGE_MGR install vim
 
@@ -27,7 +29,7 @@ else
   git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 fi
 
-vim +PluginInstall +qall
+cd $HOME; vim +PluginInstall +qall
 
 echo "\033[0;34mSetting up z...\033[0m"
 
@@ -50,6 +52,11 @@ if [ -d $HOME/.shadowboxes/n ]
 then
   (cd $HOME/.shadowboxes/n; git pull -q)
 else
-  https://github.com/tj/n.git $HOME/.shadowboxes/n
-  (cd $HOME/.shadowboxes/n; make install)
+  git clone https://github.com/tj/n.git $HOME/.shadowbo
+  (cd $HOME/.shadowboxes/n; PREFIX=$HOME make install)
+fi
+
+if [ $IS_MAC = 1 ]
+then
+  cp fonts/*.otf /Library/Fonts/
 fi
