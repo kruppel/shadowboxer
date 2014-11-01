@@ -15,8 +15,9 @@ rsync --exclude ".git/" --exclude ".DS_Store" --exclude "setup" --exclude "vm" \
 
 echo "\033[0;34mInstalling dependencies...\033[0m"
 
+command -v make >> /dev/null 2>&1 || $PACKAGE_MGR install make
 command -v git >> /dev/null 2>&1 || $PACKAGE_MGR install git
-command -v curl >> /dev/null 2>&1 || $PACKAGE_MGR install curl && chsh -s $(which curl)
+command -v curl >> /dev/null 2>&1 || $PACKAGE_MGR install curl
 command -v zsh >> /dev/null 2>&1 || $PACKAGE_MGR install zsh && chsh -s $(which zsh)
 command -v vim >> /dev/null 2>&1 || $PACKAGE_MGR install vim
 
@@ -52,7 +53,7 @@ if [ -d $HOME/.shadowboxes/n ]
 then
   (cd $HOME/.shadowboxes/n; git pull -q)
 else
-  git clone https://github.com/tj/n.git $HOME/.shadowbo
+  git clone https://github.com/tj/n.git $HOME/.shadowboxes/n
   (cd $HOME/.shadowboxes/n; PREFIX=$HOME make install)
 fi
 
