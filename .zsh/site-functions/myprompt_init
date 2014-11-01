@@ -1,0 +1,5 @@
+#!/usr/bin/zsh
+
+myprompt_init() {
+  PROMPT='%(?.%F{blue}.%F{red})⫸%f '
+}

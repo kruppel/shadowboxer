@@ -10,8 +10,11 @@ else
   PACKAGE_MGR='sudo apt-get'
 fi
 
-rsync --exclude ".git/" --exclude ".DS_Store" --exclude "setup" --exclude "vm" \
-  -av --no-perms -q "$(dirname $0)/" ~
+rsync --exclude ".git/" \
+      --exclude ".DS_Store" \
+      --exclude "setup" \
+      --exclude "vm" \
+      -av --no-perms -q "$(dirname $0)/" ~
 
 echo "\033[0;34mInstalling dependencies...\033[0m"
 
