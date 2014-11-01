@@ -6,4 +6,7 @@ export PATH=$HOME/bin:$PATH
 export N_PREFIX=$HOME
 
 SSH_KEY_FILE=$HOME/.ssh/id_rsa
-[[ -z $(ssh-add -L | grep $SSH_KEY_FILE) ]] && ssh-add $SSH_KEY_FILE
+if [[ -a SSH_KEY_FILE && -z $(ssh-add -L | grep $SSH_KEY_FILE) ]]
+then
+  ssh-add $SSH_KEY_FILE
+fi
