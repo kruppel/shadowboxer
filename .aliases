@@ -1,4 +1,5 @@
 alias bx="bundle exec"
+alias ls="ls --color"
 alias ll="ls -l"
 alias rake="noglob rake"
 alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
