@@ -10,3 +10,5 @@ fi
 
 autoload -U myprompt_init
 myprompt_init
+
+bindkey -e
