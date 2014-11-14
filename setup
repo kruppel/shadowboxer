@@ -12,6 +12,7 @@ fi
 
 rsync --exclude ".git/" \
       --exclude ".DS_Store" \
+      --exclude "README.md" \
       --exclude "setup" \
       --exclude "vm" \
       -av --no-perms -q "$(dirname $0)/" ~
