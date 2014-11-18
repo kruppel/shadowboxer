@@ -63,5 +63,5 @@ fi
 
 if [ $IS_MAC = 1 ]
 then
-  cp fonts/*.otf /Library/Fonts/
+  cp .fonts/*.otf /Library/Fonts/
 fi
