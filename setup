@@ -6,8 +6,10 @@ WORKING_DIR=$(pwd)
 if [ $IS_MAC = 1 ]
 then
   PACKAGE_MGR='brew'
+  THE_SILVER_SEARCHER='the_silver_searcher'
 else
   PACKAGE_MGR='sudo apt-get'
+  THE_SILVER_SEARCHER='silversearcher-ag'
 fi
 
 rsync --exclude ".git/" \
@@ -24,6 +26,7 @@ command -v git >> /dev/null 2>&1 || $PACKAGE_MGR install git
 command -v curl >> /dev/null 2>&1 || $PACKAGE_MGR install curl
 command -v zsh >> /dev/null 2>&1 || $PACKAGE_MGR install zsh && chsh -s $(which zsh)
 command -v vim >> /dev/null 2>&1 || $PACKAGE_MGR install vim
+command -v ag >> /dev/null 2>&1 || $PACKAGE_MGR install $THE_SILVER_SEARCHER
 
 echo "\033[0;34mSetting up Vundle...\033[0m"
 
