@@ -66,3 +66,13 @@ inoremap <C-k> <ESC>:m .-2<CR>==gi
 " Visual mode
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
+
+" ctrlp
+"
+" Caching
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+
+" Use ag (the_silver_searcher)
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
