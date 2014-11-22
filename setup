@@ -24,7 +24,7 @@ echo "\033[0;34mInstalling dependencies...\033[0m"
 command -v make >> /dev/null 2>&1 || $PACKAGE_MGR install make
 command -v git >> /dev/null 2>&1 || $PACKAGE_MGR install git
 command -v curl >> /dev/null 2>&1 || $PACKAGE_MGR install curl
-command -v zsh >> /dev/null 2>&1 || $PACKAGE_MGR install zsh && chsh -s $(which zsh)
+command -v zsh >> /dev/null 2>&1 || ($PACKAGE_MGR install zsh && chsh -s $(which zsh))
 command -v vim >> /dev/null 2>&1 || $PACKAGE_MGR install vim
 command -v ag >> /dev/null 2>&1 || $PACKAGE_MGR install $THE_SILVER_SEARCHER
 
