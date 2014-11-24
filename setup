@@ -7,13 +7,17 @@ if [ $IS_MAC = 1 ]
 then
   PACKAGE_MGR='brew'
   THE_SILVER_SEARCHER='the_silver_searcher'
+  cat .aliases/osx .aliases/shared > $HOME/.aliases
 else
   PACKAGE_MGR='sudo apt-get'
+  # Requires Ubuntu > 13.10
   THE_SILVER_SEARCHER='silversearcher-ag'
+  cat .aliases/linux .aliases/shared > $HOME/.aliases
 fi
 
 rsync --exclude ".git/" \
       --exclude ".DS_Store" \
+      --exclude ".aliases" \
       --exclude "README.md" \
       --exclude "setup" \
       --exclude "vm" \
