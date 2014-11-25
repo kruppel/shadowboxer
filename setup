@@ -15,14 +15,6 @@ else
   cat .aliases/linux .aliases/shared > $HOME/.aliases
 fi
 
-rsync --exclude ".git/" \
-      --exclude ".DS_Store" \
-      --exclude ".aliases" \
-      --exclude "README.md" \
-      --exclude "setup" \
-      --exclude "vm" \
-      -av --no-perms -q "$(dirname $0)/" ~
-
 echo "\033[0;34mInstalling dependencies...\033[0m"
 
 command -v make >> /dev/null 2>&1 || $PACKAGE_MGR install make
@@ -41,7 +33,7 @@ else
   git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 fi
 
-cd $HOME; vim +PluginInstall +qall
+(cd $HOME; vim +PluginInstall +qall)
 
 echo "\033[0;34mSetting up z...\033[0m"
 
@@ -67,6 +59,35 @@ else
   git clone https://github.com/tj/n.git $HOME/.shadowboxes/n
   (cd $HOME/.shadowboxes/n; PREFIX=$HOME make install)
 fi
+
+echo "\033[0;34mSetting up ruby-install...\033[0m"
+
+if [ -d $HOME/.shadowboxes/ruby-install ]
+then
+  (cd $HOME/.shadowboxes/ruby-install; git pull -q)
+else
+  git clone https://github.com/postmodern/ruby-install.git $HOME/.shadowboxes/ruby-install
+  (cd $HOME/.shadowboxes/ruby-install; sudo make install)
+fi
+
+echo "\033[0;34mSetting up chruby...\033[0m"
+
+if [ -d $HOME/.shadowboxes/chruby ]
+then
+  (cd $HOME/.shadowboxes/chruby; git pull -q)
+else
+  git clone https://github.com/postmodern/chruby.git $HOME/.shadowboxes/chruby
+  (cd $HOME/.shadowboxes/chruby; sudo make install)
+fi
+
+rsync --exclude ".git/" \
+      --exclude ".DS_Store" \
+      --exclude ".aliases" \
+      --exclude ".fonts" \
+      --exclude "README.md" \
+      --exclude "setup" \
+      --exclude "vm" \
+      -av --no-perms -q "$(dirname $0)/" $HOME
 
 if [ $IS_MAC = 1 ]
 then

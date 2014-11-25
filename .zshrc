@@ -1,5 +1,9 @@
 . ~/.aliases
 
+# chruby auto-switching
+. /usr/local/share/chruby/chruby.sh
+. /usr/local/share/chruby/auto.sh
+
 [[ -h $HOME/bin/z.sh ]] && source $HOME/bin/z.sh
 
 SSH_KEY_FILE=$HOME/.ssh/id_rsa
