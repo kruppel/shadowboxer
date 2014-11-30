@@ -15,7 +15,7 @@ else
   cat .aliases/linux .aliases/shared > $HOME/.aliases
 fi
 
-echo "\033[0;34mInstalling dependencies...\033[0m"
+echo -e "\033[0;34mInstalling dependencies...\033[0m"
 
 function check_dependency {
   if [ $IS_MAC = 1 ]
@@ -27,7 +27,7 @@ function check_dependency {
 }
 
 function install_dependency {
-  echo "\033[0;34mInstalling $1...\033[0m"
+  echo -e "\033[0;34mInstalling $1...\033[0m"
   check_dependency $1 || $PACKAGE_MGR install $1
 }
 
@@ -37,7 +37,7 @@ do
   install_dependency $dependency
 done
 
-echo "\033[0;34mSetting up Vundle...\033[0m"
+echo -e "\033[0;34mSetting up Vundle...\033[0m"
 
 if [ -d $HOME/.vim/bundle/Vundle.vim ]
 then
@@ -48,7 +48,7 @@ fi
 
 (cd $HOME; vim +PluginInstall +qall)
 
-echo "\033[0;34mSetting up z...\033[0m"
+echo -e "\033[0;34mSetting up z...\033[0m"
 
 mkdir -p $HOME/.shadowboxes $HOME/bin $HOME/man
 
@@ -63,7 +63,7 @@ else
   source $HOME/bin/z.sh
 fi
 
-echo "\033[0;34mSetting up n...\033[0m"
+echo -e "\033[0;34mSetting up n...\033[0m"
 
 if [ -d $HOME/.shadowboxes/n ]
 then
@@ -73,7 +73,7 @@ else
   (cd $HOME/.shadowboxes/n; PREFIX=$HOME make install)
 fi
 
-echo "\033[0;34mSetting up ruby-install...\033[0m"
+echo -e "\033[0;34mSetting up ruby-install...\033[0m"
 
 if [ -d $HOME/.shadowboxes/ruby-install ]
 then
@@ -83,7 +83,7 @@ else
   (cd $HOME/.shadowboxes/ruby-install; sudo make install)
 fi
 
-echo "\033[0;34mSetting up chruby...\033[0m"
+echo -e "\033[0;34mSetting up chruby...\033[0m"
 
 if [ -d $HOME/.shadowboxes/chruby ]
 then
