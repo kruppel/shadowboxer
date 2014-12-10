@@ -11,6 +11,7 @@ Plugin 'L9'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic'
+Plugin 'fatih/vim-go'
 Bundle 'pangloss/vim-javascript'
 
 call vundle#end()
