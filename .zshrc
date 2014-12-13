@@ -16,3 +16,6 @@ autoload -U myprompt_init
 myprompt_init
 
 bindkey -e
+
+HISTFILE=~/.zsh/history
+setopt SHARE_HISTORY
