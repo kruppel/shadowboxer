@@ -50,6 +50,7 @@ set backupdir^=~/.vim/_backup//
 set directory^=~/.vim/_temp//
 
 set pastetoggle=<F2>
+set foldmethod=manual
 
 let g:airline_powerline_fonts=1
 let g:airline_theme='zenburn'
