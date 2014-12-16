@@ -12,7 +12,8 @@ then
   ssh-add $SSH_KEY_FILE
 fi
 
-autoload -U myprompt_init
+setopt promptsubst
+autoload -Uz myprompt_init
 myprompt_init
 
 bindkey -e

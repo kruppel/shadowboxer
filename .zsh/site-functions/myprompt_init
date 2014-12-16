@@ -1,5 +1,18 @@
 #!/usr/bin/zsh
 
 myprompt_init() {
+  setopt promptsubst
+
+  autoload -Uz vcs_info
+  autoload -U colors && colors
+  zstyle ':vcs_info:*' enable git svn
+  zstyle ':vcs_info:git:*' check-for-changes true
+  zstyle ':vcs_info:git*' formats "%F{magenta}%b%%f"
+
+  precmd() {
+    vcs_info
+  }
+
   PROMPT='%F{cyan}%m%f:%F{yellow}%~%f %(?.%F{blue}.%F{red})⫸%f '
+  RPROMPT='${vcs_info_msg_0_}'
 }
