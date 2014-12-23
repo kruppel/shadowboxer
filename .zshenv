@@ -1,4 +1,5 @@
-PATH="$HOME/bin:$PATH"
-MANPATH="$HOME/man:$MANPATH"
-N_PREFIX=$HOME
+export PATH=$HOME/bin:$PATH
+export MANPATH=$HOME/man:$MANPATH
+export N_PREFIX=$HOME
+export GOPATH=$HOME/.go
 fpath=("$HOME/.zsh/site-functions" $fpath)
