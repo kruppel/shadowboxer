@@ -12,11 +12,11 @@ then
   ssh-add $SSH_KEY_FILE
 fi
 
-setopt promptsubst
+setopt PROMPTSUBST
 autoload -Uz myprompt_init
 myprompt_init
 
 bindkey -e
 
-HISTFILE=~/.zsh/history
+setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
