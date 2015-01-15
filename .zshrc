@@ -1,8 +1,11 @@
 . ~/.aliases
 
 # chruby auto-switching
-. /usr/local/share/chruby/chruby.sh
-. /usr/local/share/chruby/auto.sh
+if [[ -d /usr/localshare/chruby ]]
+then
+  . /usr/local/share/chruby/chruby.sh
+  . /usr/local/share/chruby/auto.sh
+fi
 
 [[ -h $HOME/bin/z.sh ]] && source $HOME/bin/z.sh
 
