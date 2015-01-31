@@ -1,7 +1,7 @@
 . ~/.aliases
 
 # chruby auto-switching
-if [[ -d /usr/localshare/chruby ]]
+if [[ -d /usr/local/share/chruby ]]
 then
   . /usr/local/share/chruby/chruby.sh
   . /usr/local/share/chruby/auto.sh
