@@ -12,6 +12,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic'
 Plugin 'fatih/vim-go'
+Plugin 'Keithbsmiley/swift.vim'
 Bundle 'pangloss/vim-javascript'
 
 call vundle#end()
@@ -68,6 +69,10 @@ inoremap <C-k> <ESC>:m .-2<CR>==gi
 " Visual mode
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
+
+" Stripping whitespace
+"
+nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 
 " ctrlp
 "
