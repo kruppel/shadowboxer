@@ -12,6 +12,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic'
 Plugin 'fatih/vim-go'
+Plugin 'mxw/vim-jsx'
 Plugin 'Keithbsmiley/swift.vim'
 Bundle 'pangloss/vim-javascript'
 
@@ -78,6 +79,11 @@ nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 "
 " Caching
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+
+" vim-jsx
+"
+" Enable JSX syntax highlighting in .js files
+let g:jsx_ext_required = 0
 
 " Use ag (the_silver_searcher)
 if executable('ag')
