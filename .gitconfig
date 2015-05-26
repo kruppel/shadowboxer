@@ -52,3 +52,5 @@
   email = (none)
 [grep]
   extendRegexp = true
+[push]
+  default = simple
