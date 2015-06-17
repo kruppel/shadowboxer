@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
 
 WORKING_DIR=$(pwd)
+DEPENDENCIES=('git' 'curl' 'zsh' 'vim')
+
 [ $(uname -s) = 'Darwin' ] && IS_MAC=1 || IS_MAC=0
 
 if [ $IS_MAC = 1 ]
 then
   PACKAGE_MGR='brew'
-  THE_SILVER_SEARCHER='the_silver_searcher'
+  DEPENDENCIES+=(${DEPENDENCIES[@]} 'reattach-to-user-namespace' 'the_silver_searcher')
   cat .aliases/osx .aliases/shared > $HOME/.aliases
 else
   PACKAGE_MGR='sudo apt-get'
   # Requires Ubuntu > 13.10
-  THE_SILVER_SEARCHER='silversearcher-ag'
+  DEPENDENCIES+=(${DEPENDENCIES[@]} 'silversearcher-ag')
   cat .aliases/linux .aliases/shared > $HOME/.aliases
 fi
 
@@ -31,7 +33,6 @@ function install_dependency {
   check_dependency $1 || $PACKAGE_MGR install $1
 }
 
-DEPENDENCIES=('git' 'curl' 'zsh' 'vim' $THE_SILVER_SEARCHER)
 for dependency in ${DEPENDENCIES[@]}
 do
   install_dependency $dependency
