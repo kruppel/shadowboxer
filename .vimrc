@@ -5,16 +5,17 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'L9'
-Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
-Plugin 'scrooloose/syntastic'
 Plugin 'fatih/vim-go'
-Plugin 'mxw/vim-jsx'
+Plugin 'gmarik/Vundle.vim'
 Plugin 'Keithbsmiley/swift.vim'
-Bundle 'pangloss/vim-javascript'
+Plugin 'kien/ctrlp.vim'
+Plugin 'L9'
+Plugin 'mxw/vim-jsx'
+Plugin 'pangloss/vim-javascript'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-scripts/ruby-matchit'
 
 call vundle#end()
 
