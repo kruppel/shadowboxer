@@ -8,6 +8,7 @@ call vundle#begin()
 Plugin 'bling/vim-airline'
 Plugin 'fatih/vim-go'
 Plugin 'gmarik/Vundle.vim'
+Plugin 'junegunn/seoul256.vim'
 Plugin 'Keithbsmiley/swift.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'L9'
@@ -90,3 +91,7 @@ let g:jsx_ext_required = 0
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
+" seoul256
+let g:seoul256_background = 234
+colo seoul256
