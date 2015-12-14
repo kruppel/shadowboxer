@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 WORKING_DIR=$(pwd)
-DEPENDENCIES=('git' 'curl' 'zsh' 'vim')
+DEPENDENCIES=('git' 'curl' 'zsh' 'tmux' 'vim')
 
 [ $(uname -s) = 'Darwin' ] && IS_MAC=1 || IS_MAC=0
 
