@@ -24,6 +24,9 @@ setopt SHARE_HISTORY
 
 set -o vi
 
+# Autoload compinit for autocompletion
+autoload -Uz compinit && compinit
+
 # enabling recursive search
 # ref: http://chneukirchen.org/blog/archive/2013/03/10-fresh-zsh-tricks-you-may-not-know.html
 autoload -Uz narrow-to-region
