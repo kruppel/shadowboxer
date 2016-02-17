@@ -22,7 +22,7 @@ echo -e "\033[0;34mInstalling dependencies...\033[0m"
 function check_dependency {
   if [ $IS_MAC = 1 ]
   then
-    brew info --installed $1 >> /dev/null 2>&1
+    brew info --installed $1 | grep -q "Not installed" >> /dev/null 2>&1
   else
     sudo dpkg-query -L $1 >> /dev/null 2>&1
   fi
