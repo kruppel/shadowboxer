@@ -50,6 +50,7 @@
 [user]
   name = Kurt Ruppel
   email = (none)
+  useConfigOnly = true
 [grep]
   extendRegexp = true
 [push]
