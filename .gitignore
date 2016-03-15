@@ -1,3 +1,4 @@
 .DS_Store
 .shadowboxes
+.byebug_history
 vm/.vagrant
