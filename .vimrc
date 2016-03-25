@@ -7,6 +7,7 @@ call vundle#begin()
 
 Plugin 'bling/vim-airline'
 Plugin 'derekwyatt/vim-scala'
+Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim'}
 Plugin 'fatih/vim-go'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'junegunn/seoul256.vim'
