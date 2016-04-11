@@ -15,6 +15,8 @@ then
   ssh-add $SSH_KEY_FILE
 fi
 
+fpath=($HOME/.zsh/site-functions $fpath)
+
 setopt PROMPTSUBST
 autoload -Uz myprompt_init
 myprompt_init
@@ -25,7 +27,15 @@ setopt SHARE_HISTORY
 set -o vi
 
 # Autoload compinit for autocompletion
-autoload -Uz compinit && compinit
+autoload -Uz compinit
+
+if [[ -s /usr/local/share/zsh-completions ]]
+then
+  fpath=($HOME/.zsh/site-functions /usr/local/share/zsh-completions $fpath)
+  rm -f $HOME/.zcompdump
+fi
+
+compinit
 
 # enabling recursive search
 # ref: http://chneukirchen.org/blog/archive/2013/03/10-fresh-zsh-tricks-you-may-not-know.html
