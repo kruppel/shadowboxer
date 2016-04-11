@@ -49,7 +49,6 @@
   ign = ls-files -o -i --exclude-standard
 [user]
   name = Kurt Ruppel
-  email = (none)
   useConfigOnly = true
 [grep]
   extendRegexp = true
