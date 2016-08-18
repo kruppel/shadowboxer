@@ -19,6 +19,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-scripts/ruby-matchit'
 
 call vundle#end()
