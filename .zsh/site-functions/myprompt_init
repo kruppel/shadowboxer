@@ -13,6 +13,6 @@ myprompt_init() {
     vcs_info
   }
 
-  PROMPT='%F{cyan}%m%f:%F{yellow}%~%f %(?.%F{blue}.%F{red})⫸%f '
+  PROMPT='%F{cyan}%m%f:%F{yellow}%~%f %(?.%F{blue}.%F{red})⫸%f  '
   RPROMPT='${vcs_info_msg_0_}'
 }
