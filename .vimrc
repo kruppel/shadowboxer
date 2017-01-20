@@ -99,3 +99,5 @@ endif
 " seoul256
 let g:seoul256_background = 234
 colo seoul256
+
+au BufRead,BufNewFile *.avsc setfiletype javascript
