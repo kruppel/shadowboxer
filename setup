@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-WORKING_DIR=$(pwd)
+DIRNAME=$(dirname $0)
 DEPENDENCIES=('git' 'curl' 'zsh' 'tmux' 'vim' 'emacs' 'tree')
 
 [ $(uname -s) = 'Darwin' ] && IS_MAC=1 || IS_MAC=0
@@ -9,12 +9,12 @@ if [ $IS_MAC = 1 ]
 then
   PACKAGE_MGR='brew'
   DEPENDENCIES+=(${DEPENDENCIES[@]} 'reattach-to-user-namespace' 'the_silver_searcher' 'zsh-completions')
-  cat .aliases/osx .aliases/shared > $HOME/.aliases
+  cat $DIRNAME/.aliases/osx $DIRNAME/.aliases/shared > $HOME/.aliases
 else
-  PACKAGE_MGR='sudo apt-get'
+  PACKAGE_MGR='sudo apt-get -y'
   # Requires Ubuntu > 13.10
   DEPENDENCIES+=(${DEPENDENCIES[@]} 'silversearcher-ag')
-  cat .aliases/linux .aliases/shared > $HOME/.aliases
+  cat $DIRNAME/.aliases/linux $DIRNAME/.aliases/shared > $HOME/.aliases
 fi
 
 echo -e "\033[0;34mInstalling dependencies...\033[0m"
