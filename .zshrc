@@ -54,4 +54,4 @@ bindkey "^R" _history-incremental-preserving-pattern-search-backward
 bindkey -M isearch "^R" history-incremental-pattern-search-backward
 bindkey "^S" history-incremental-pattern-search-forward
 
-export PATH=$HOME/bin:./node_modules/.bin:$PATH
+export PATH=$HOME/bin:$PATH

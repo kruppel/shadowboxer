@@ -1,4 +1,5 @@
 alias bx="bundle exec"
 alias ll="ls -l"
+alias npm-exec="PATH=$(npm bin):$PATH"
 alias rake="noglob rake"
 alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
