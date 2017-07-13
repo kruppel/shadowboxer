@@ -5,4 +5,9 @@ alias rake="noglob rake"
 alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
 
 # Docker related aliases
-alias docker-id="docker images --format '{{.ID}}'"
+docker-cid() {
+  docker ps --format "{{.ID}}" -f name="$@"
+}
+
+alias docker-iid="docker images --format '{{.ID}}'"
+alias docker-build="docker build -t $(whoami)/$(dirname $0) ."
