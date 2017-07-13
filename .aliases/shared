@@ -3,3 +3,6 @@ alias ll="ls -l"
 alias npm-exec="PATH=$(npm bin):$PATH"
 alias rake="noglob rake"
 alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
+
+# Docker related aliases
+alias docker-id="docker images --format '{{.ID}}'"
