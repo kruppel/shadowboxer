@@ -86,6 +86,9 @@ nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 " Caching
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 
+" Exclude files
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
 " vim-jsx
 "
 " Enable JSX syntax highlighting in .js files
