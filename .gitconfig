@@ -27,6 +27,7 @@
   fresh = "!fresh() { curr=`git curr`;git stash;git co master;git purr;git co $curr; git rebase master; };fresh"
   last = "!last() { git for-each-ref --sort=-committerdate refs/heads/; };last | sed -e 's/^.*refs\\/heads\\/\\(.*\\)$/\\1/g' | head -5"
   masterp = !git co master && git pull --rebase
+  search = "log --all --grep"
   whoami = "!whoami() { echo \"`git config --get user.name` <`git config --get user.email`>\"; };whoami"
   tagq = "!tagq() { git log --before=$1 --tags --simplify-by-decoration --pretty='format:%ai %d' | grep 'tag:' | head -1 | sed -e 's/.*(tag: \\([v0-9\\.]*\\).*/\\1/g'; }; tagq"
   at = config user.email
