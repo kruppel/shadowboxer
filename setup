@@ -114,4 +114,15 @@ rsync --exclude ".git/" \
 if [ $IS_MAC = 1 ]
 then
   cp .fonts/*.otf /Library/Fonts/
+
+  brew tap caskroom/cask
+  brew cask install \
+    1password \
+    alfred \
+    divvy \
+    docker \
+    google-chrome \
+    licecap \
+    sketch \
+    spotify
 fi
