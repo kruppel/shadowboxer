@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
 
+#!/usr/bin/env bash
 DIRNAME=$(dirname $0)
 DEPENDENCIES=('git' 'curl' 'zsh' 'tmux' 'vim' 'emacs' 'tree')
 
@@ -8,12 +8,12 @@ DEPENDENCIES=('git' 'curl' 'zsh' 'tmux' 'vim' 'emacs' 'tree')
 if [ $IS_MAC = 1 ]
 then
   PACKAGE_MGR='brew'
-  DEPENDENCIES+=(${DEPENDENCIES[@]} 'reattach-to-user-namespace' 'the_silver_searcher' 'zsh-completions')
+  DEPENDENCIES+=('reattach-to-user-namespace' 'the_silver_searcher' 'zsh-completions')
   cat $DIRNAME/.aliases/osx $DIRNAME/.aliases/shared > $HOME/.aliases
 else
   PACKAGE_MGR='sudo apt-get -y'
   # Requires Ubuntu > 13.10
-  DEPENDENCIES+=(${DEPENDENCIES[@]} 'silversearcher-ag')
+  DEPENDENCIES+=('silversearcher-ag')
   cat $DIRNAME/.aliases/linux $DIRNAME/.aliases/shared > $HOME/.aliases
 fi
 
@@ -23,6 +23,7 @@ function check_dependency {
   if [ $IS_MAC = 1 ]
   then
     brew info --installed $1 | grep -q "Not installed" >> /dev/null 2>&1
+    test $? -eq 1
   else
     sudo dpkg-query -L $1 >> /dev/null 2>&1
   fi
@@ -113,16 +114,33 @@ rsync --exclude ".git/" \
 
 if [ $IS_MAC = 1 ]
 then
+  echo -e "\033[0;34mSetting up fonts...\033[0m"
+
   cp .fonts/*.otf /Library/Fonts/
 
+  if [ -d $HOME/.shadowboxes/iTerm2-Color-Schemes ]
+  then
+    (cd $HOME/.shadowboxes/iTerm2-Color-Schemes; git pull -q)
+  else
+    git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git $HOME/.shadowboxes/iTerm2-Color-Schemes
+  fi
+
+  CASKS=('1password' 'alfred' 'divvy' 'docker' 'google-chrome' 'iTerm2' 'licecap' 'sketch' 'spotify')
+
   brew tap caskroom/cask
-  brew cask install \
-    1password \
-    alfred \
-    divvy \
-    docker \
-    google-chrome \
-    licecap \
-    sketch \
-    spotify
+
+  function check_cask {
+    brew cask info $1 | grep -q "Not installed" >> /dev/null 2>&1
+    test $? -eq 1
+  }
+
+  function install_cask {
+    echo -e "\033[0;34mInstalling $1...\033[0m"
+    check_cask $1 || brew cask install $1
+  }
+
+  for cask in ${CASKS[@]}
+  do
+    install_cask $cask
+  done
 fi

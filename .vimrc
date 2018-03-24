@@ -89,6 +89,11 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 " Exclude files
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
+" vim-go
+"
+" Disable warnings for vim version
+let g:go_version_warning = 0
+
 " vim-jsx
 "
 " Enable JSX syntax highlighting in .js files
