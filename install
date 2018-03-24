@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+[ $(uname -s) = 'Darwin' ] && IS_MAC=1 || IS_MAC=0
+
+if [ $IS_MAC = 1 ]
+then
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  brew install git
+else
+  apt-get install -y git
+fi
+
+git clone https://github.com/kruppel/shadowboxer.git $HOME/.shadowboxer
+cd $HOME/.shadowboxer
+./setup
