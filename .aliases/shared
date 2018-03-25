@@ -10,7 +10,10 @@ docker-cid() {
 }
 
 alias docker-iid="docker images --format '{{.ID}}'"
-alias docker-build="docker build -t $(whoami)/$(basename $(dir)) ."
+
+docker-build() {
+  docker build -t "kruppel/$(pwd | rev | cut -d '/' -f1 | rev)"
+}
 
 kubectl-exec() {
   pod=$(kubectl get pods -o json | jq ".items | map(select(.metadata.labels.app == \"$1\"))[0].metadata.name" -r)
