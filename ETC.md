@@ -1,5 +1,11 @@
 # MacOS
 
+## Fix insecure zsh directories
+
+```
+$ compaudit | xargs chmod g-w
+```
+
 ## Speed up cursor
 
 ```
