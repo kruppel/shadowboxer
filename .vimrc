@@ -86,9 +86,6 @@ nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 " Caching
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 
-" Exclude files
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
 " vim-go
 "
 " Disable warnings for vim version
@@ -102,6 +99,8 @@ let g:jsx_ext_required = 0
 " Use ag (the_silver_searcher)
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+  let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 endif
 
 " seoul256
