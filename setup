@@ -108,6 +108,9 @@ rsync --exclude ".git/" \
       --exclude ".aliases" \
       --exclude ".fonts" \
       --exclude "README.md" \
+      --exclude "ETC.md" \
+      --exclude "Dockerfile" \
+      --exclude "install" \
       --exclude "setup" \
       --exclude "vm" \
       -av --no-perms -q "$(dirname $0)/" $HOME
