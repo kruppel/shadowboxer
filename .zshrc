@@ -1,5 +1,3 @@
-. ~/.aliases
-
 # chruby auto-switching
 if [[ -d /usr/local/share/chruby ]]
 then
@@ -55,3 +53,5 @@ bindkey -M isearch "^R" history-incremental-pattern-search-backward
 bindkey "^S" history-incremental-pattern-search-forward
 
 export PATH=$HOME/bin:$PATH
+
+. ~/.aliases
