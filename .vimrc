@@ -90,6 +90,7 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 "
 " Disable warnings for vim version
 let g:go_version_warning = 0
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
 
 " vim-jsx
 "
