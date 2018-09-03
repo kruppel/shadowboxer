@@ -10,10 +10,13 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim'}
 Plugin 'fatih/vim-go'
 Plugin 'gmarik/Vundle.vim'
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
 Plugin 'junegunn/seoul256.vim'
 Plugin 'Keithbsmiley/swift.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'L9'
+Plugin 'leafgarland/typescript-vim'
 Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
 Plugin 'rust-lang/rust.vim'
@@ -89,8 +92,9 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 " vim-go
 "
 " Disable warnings for vim version
-let g:go_version_warning = 0
+"let g:go_version_warning = 0
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
 
 " vim-jsx
 "
@@ -109,3 +113,5 @@ let g:seoul256_background = 234
 colo seoul256
 
 au BufRead,BufNewFile *.avsc setfiletype javascript
+au Filetype markdown Goyo 80
+au Filetype markdown Limelight
