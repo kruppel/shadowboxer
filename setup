@@ -1,5 +1,5 @@
-
 #!/usr/bin/env bash
+
 DIRNAME=$(dirname $0)
 DEPENDENCIES=('git' 'curl' 'zsh' 'tmux' 'vim' 'emacs' 'tree')
 
@@ -49,6 +49,17 @@ else
 fi
 
 (cd $HOME; vim +PluginInstall +qall)
+
+echo -e "\033[0;34mSetting up fzf...\033[0m"
+
+mkdir -p $HOME/.shadowboxes $HOME/bin $HOME/man
+
+if [ -d $HOME/.shadowboxes/fzf ]
+then
+  (cd $HOME/.shadowboxes/fzf; git pull -q)
+else
+  git clone https://github.com/junegunn/fzf.git $HOME/.shadowboxes/junegunn/fzf
+fi
 
 echo -e "\033[0;34mSetting up z...\033[0m"
 
@@ -114,6 +125,8 @@ rsync --exclude ".git/" \
       --exclude "setup" \
       --exclude "vm" \
       -av --no-perms -q "$(dirname $0)/" $HOME
+
+$HOME/.shadowboxes/fzf/install --all
 
 if [ $IS_MAC = 1 ]
 then

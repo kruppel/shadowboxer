@@ -10,11 +10,12 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim'}
 Plugin 'fatih/vim-go'
 Plugin 'gmarik/Vundle.vim'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'junegunn/seoul256.vim'
 Plugin 'Keithbsmiley/swift.vim'
-Plugin 'kien/ctrlp.vim'
 Plugin 'L9'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'mxw/vim-jsx'
@@ -24,6 +25,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-scripts/ruby-matchit'
+Plugin 'w0rp/ale'
 
 call vundle#end()
 
@@ -84,10 +86,11 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 "
 nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 
-" ctrlp
+" fzf
 "
-" Caching
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+" Fuzzy search finder
+set rtp+=/usr/local/opt/fzf
+nnoremap <silent> <C-p> :FZF<CR>
 
 " vim-go
 "
@@ -101,12 +104,15 @@ autocmd FileType go nmap <leader>r  <Plug>(go-run)
 " Enable JSX syntax highlighting in .js files
 let g:jsx_ext_required = 0
 
-" Use ag (the_silver_searcher)
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-else
-  let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-endif
+" ale
+"
+" Linting
+let g:ale_fixers = {
+\  'javascript': ['prettier'],
+\  'ruby': ['rubocop'],
+\}
+let g:ale_enabled = 1
+let g:ale_fix_on_save = 1
 
 " seoul256
 let g:seoul256_background = 234
