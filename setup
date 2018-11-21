@@ -8,7 +8,7 @@ DEPENDENCIES=('git' 'curl' 'zsh' 'tmux' 'vim' 'emacs' 'tree', 'ripgrep')
 if [ $IS_MAC = 1 ]
 then
   PACKAGE_MGR='brew'
-  DEPENDENCIES+=('reattach-to-user-namespace' 'the_silver_searcher' 'zsh-completions')
+  DEPENDENCIES+=('reattach-to-user-namespace' 'the_silver_searcher' 'zsh-completions' 'bat' 'exa')
   cat $DIRNAME/.aliases/osx $DIRNAME/.aliases/shared > $HOME/.aliases
 else
   PACKAGE_MGR='sudo apt-get -y'
