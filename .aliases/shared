@@ -1,6 +1,5 @@
 alias bx="bundle exec"
 alias ll="ls -l"
-alias npm-exec="PATH=$(npm bin):$PATH"
 alias rake="noglob rake"
 alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
 alias vi="vim"
@@ -20,3 +19,7 @@ kubectl-exec() {
   pod=$(kubectl get pods -o json | jq ".items | map(select(.metadata.labels.app == \"$1\"))[0].metadata.name" -r)
   kubectl exec -it $pod ${@:2}
 }
+
+alias gg="git grep"
+alias gpm="git push origin master"
+alias gci="git ci -am"

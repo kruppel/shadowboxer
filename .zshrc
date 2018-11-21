@@ -30,10 +30,14 @@ autoload -Uz compinit
 if [[ -s /usr/local/share/zsh-completions ]]
 then
   fpath=($HOME/.zsh/site-functions /usr/local/share/zsh-completions $fpath)
-  rm -f $HOME/.zcompdump
 fi
 
-compinit
+if [[ -n ${HOME}/.zcompdump(#qN.mh+24) ]]
+then
+  compinit
+else
+  compinit -C
+fi
 
 # enabling recursive search
 # ref: http://chneukirchen.org/blog/archive/2013/03/10-fresh-zsh-tricks-you-may-not-know.html
@@ -52,6 +56,6 @@ bindkey "^R" _history-incremental-preserving-pattern-search-backward
 bindkey -M isearch "^R" history-incremental-pattern-search-backward
 bindkey "^S" history-incremental-pattern-search-forward
 
-export PATH=$HOME/bin:$PATH
-
 . ~/.aliases
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
