@@ -91,6 +91,8 @@ nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 " Fuzzy search finder
 set rtp+=/usr/local/opt/fzf
 nnoremap <silent> <C-p> :FZF<CR>
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>s :Rg<CR>
 
 " vim-go
 "
