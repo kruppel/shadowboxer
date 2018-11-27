@@ -5,11 +5,13 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 
+Plugin 'benmills/vimux'
 Plugin 'bling/vim-airline'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim'}
 Plugin 'fatih/vim-go'
 Plugin 'gmarik/Vundle.vim'
+Plugin 'janko-m/vim-test'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/goyo.vim'
@@ -105,6 +107,17 @@ autocmd FileType go nmap <leader>r  <Plug>(go-run)
 "
 " Enable JSX syntax highlighting in .js files
 let g:jsx_ext_required = 0
+
+" vim-test
+"
+" Testing
+nnoremap <silent> <Leader>t :TestFile<CR>
+nnoremap <silent> <Leader>s :TestNearest<CR>
+nnoremap <silent> <Leader>l :TestLast<CR>
+nnoremap <silent> <Leader>a :TestSuite<CR>
+nnoremap <silent> <Leader>gt :TestVisit<CR>
+
+let test#strategy = "vimux"
 
 " ale
 "
