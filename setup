@@ -58,7 +58,7 @@ if [ -d $HOME/.shadowboxes/fzf ]
 then
   (cd $HOME/.shadowboxes/fzf; git pull -q)
 else
-  git clone https://github.com/junegunn/fzf.git $HOME/.shadowboxes/junegunn/fzf
+  git clone https://github.com/junegunn/fzf.git $HOME/.shadowboxes/fzf
 fi
 
 echo -e "\033[0;34mSetting up z...\033[0m"
