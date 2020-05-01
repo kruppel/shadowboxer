@@ -1,3 +1,5 @@
+export PATH="$HOME/bin:$PATH"
+
 # chruby auto-switching
 if [[ -d /usr/local/share/chruby ]]
 then
