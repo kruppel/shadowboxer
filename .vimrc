@@ -11,17 +11,17 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim'}
 Plugin 'fatih/vim-go'
 Plugin 'gmarik/Vundle.vim'
+Plugin 'ianks/vim-tsx'
 Plugin 'janko-m/vim-test'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
-Plugin 'junegunn/goyo.vim'
-Plugin 'junegunn/limelight.vim'
 Plugin 'junegunn/seoul256.vim'
 Plugin 'Keithbsmiley/swift.vim'
 Plugin 'L9'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
+Plugin 'Quramy/tsuquyomi'
 Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
@@ -121,8 +121,13 @@ let test#strategy = "vimux"
 " ale
 "
 " Linting
+let g:ale_linters = {
+\  'javascript': ['eslint'],
+\  'typescript': ['eslint'],
+\}
 let g:ale_fixers = {
 \  'javascript': ['prettier'],
+\  'typescript': ['prettier'],
 \  'ruby': ['rubocop'],
 \}
 let g:ale_enabled = 1
@@ -132,6 +137,9 @@ let g:ale_fix_on_save = 1
 let g:seoul256_background = 234
 colo seoul256
 
+" tsuquyomi
+"
+" Integrate with syntastic
+let g:tsuquyomi_disable_quickfix = 1
+
 au BufRead,BufNewFile *.avsc setfiletype javascript
-au Filetype markdown Goyo 80
-au Filetype markdown Limelight
