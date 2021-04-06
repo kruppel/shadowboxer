@@ -5,6 +5,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 
+Plugin 'arcticicestudio/nord-vim'
 Plugin 'benmills/vimux'
 Plugin 'bling/vim-airline'
 Plugin 'derekwyatt/vim-scala'
@@ -135,7 +136,6 @@ let g:ale_fix_on_save = 1
 
 " seoul256
 let g:seoul256_background = 234
-colo seoul256
 
 " tsuquyomi
 "
@@ -143,3 +143,7 @@ colo seoul256
 let g:tsuquyomi_disable_quickfix = 1
 
 au BufRead,BufNewFile *.avsc setfiletype javascript
+
+" theme
+" colo seoul256
+colo nord
