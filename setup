@@ -8,7 +8,7 @@ DEPENDENCIES=('git' 'curl' 'zsh' 'tmux' 'vim' 'emacs' 'tree', 'ripgrep')
 if [ $IS_MAC = 1 ]
 then
   PACKAGE_MGR='brew'
-  DEPENDENCIES+=('reattach-to-user-namespace' 'the_silver_searcher' 'zsh-completions' 'gnupg2' 'bat' 'exa')
+  DEPENDENCIES+=('reattach-to-user-namespace' 'the_silver_searcher' 'zsh-completions' 'gnupg2' 'bat' 'exa' 'k9s' 'jq')
   cat $DIRNAME/.aliases/osx $DIRNAME/.aliases/shared > $HOME/.aliases
 else
   PACKAGE_MGR='sudo apt-get -y'
@@ -141,7 +141,7 @@ then
     git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git $HOME/.shadowboxes/iTerm2-Color-Schemes
   fi
 
-  CASKS=('1password' 'alfred' 'divvy' 'docker' 'google-chrome' 'iTerm2' 'licecap' 'spotify' 'sunsama' 'superhuman')
+  CASKS=('1password' 'alfred' 'divvy' 'docker' 'google-chrome' 'iTerm2' 'licecap' 'spotify' 'sunsama' 'superhuman' 'visual-studio-code')
 
   function check_cask {
     brew list $1 >> /dev/null 2>&1
