@@ -22,8 +22,8 @@ echo -e "\033[0;34mInstalling dependencies...\033[0m"
 function check_dependency {
   if [ $IS_MAC = 1 ]
   then
-    brew info --installed $1 | grep -q "Not installed" >> /dev/null 2>&1
-    test $? -eq 1
+    brew list $1 >> /dev/null 2>&1
+    test $? -eq 0
   else
     sudo dpkg-query -L $1 >> /dev/null 2>&1
   fi
@@ -141,18 +141,16 @@ then
     git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git $HOME/.shadowboxes/iTerm2-Color-Schemes
   fi
 
-  CASKS=('1password' 'alfred' 'divvy' 'docker' 'google-chrome' 'iTerm2' 'licecap' 'sketch' 'spotify')
-
-  brew tap caskroom/cask
+  CASKS=('1password' 'alfred' 'divvy' 'docker' 'google-chrome' 'iTerm2' 'licecap' 'spotify' 'sunsama' 'superhuman')
 
   function check_cask {
-    brew cask info $1 | grep -q "Not installed" >> /dev/null 2>&1
-    test $? -eq 1
+    brew list $1 >> /dev/null 2>&1
+    test $? -eq 0
   }
 
   function install_cask {
     echo -e "\033[0;34mInstalling $1...\033[0m"
-    check_cask $1 || brew cask install $1
+    check_cask $1 || brew install $1
   }
 
   for cask in ${CASKS[@]}
