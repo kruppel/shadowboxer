@@ -1,4 +1,5 @@
 .DS_Store
 .shadowboxes
 .byebug_history
+.vscode
 vm/.vagrant
