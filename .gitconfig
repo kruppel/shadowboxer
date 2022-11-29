@@ -24,7 +24,8 @@
   amend = commit --amend --no-edit
   curr = symbolic-ref -q HEAD --short
   purr = pull --rebase
-  fresh = "!fresh() { curr=`git curr`;git stash;git co master;git purr;git co $curr; git rebase master; };fresh"
+  main="!main() { if [ \"`git br -l main`\" ]; then echo 'main'; else echo 'master'; fi };main"
+  fresh = "!fresh() { curr=`git curr`;main=`git main`;git stash;git co $main;git purr;git co $curr; git rebase $main; };fresh"
   last = "!last() { git for-each-ref --sort=-committerdate refs/heads/; };last | sed -e 's/^.*refs\\/heads\\/\\(.*\\)$/\\1/g' | head -5"
   masterp = !git co master && git pull --rebase
   search = "log --all --grep"
