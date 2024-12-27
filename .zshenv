@@ -17,3 +17,5 @@ export MANPATH=$HOME/man:$MANPATH
 export N_PREFIX=$HOME
 export GOPATH=$HOME/.go
 export _Z_NO_RESOLVE_SYMLINKS=1
+
+export XDG_CONFIG_HOME=$HOME/.config

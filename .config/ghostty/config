@@ -1,0 +1,10 @@
+cursor-style = block
+cursor-style-blink = false
+
+font-family = FiraCode Nerd Font Mono
+font-size = 8
+
+shell-integration = zsh
+shell-integration-features = no-cursor
+
+theme = tokyonight-storm
