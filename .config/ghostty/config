@@ -7,4 +7,4 @@ font-size = 8
 shell-integration = zsh
 shell-integration-features = no-cursor
 
-theme = tokyonight-storm
+theme = light:tokyonight-day,dark:tokyonight-storm
