@@ -1,31 +1,29 @@
 #!/usr/bin/env bash
 
 DIRNAME=$(dirname $0)
-DEPENDENCIES=('git' 'curl' 'zsh' 'tmux' 'vim' 'emacs' 'tree', 'ripgrep')
+DEPENDENCIES=('git' 'curl' 'zsh' 'tmux' 'vim' 'emacs' 'tree', 'ripgrep', 'ghostty')
 
 [ $(uname -s) = 'Darwin' ] && IS_MAC=1 || IS_MAC=0
 
-if [ $IS_MAC = 1 ]
-then
+if [ $IS_MAC = 1 ]; then
   PACKAGE_MGR='brew'
   DEPENDENCIES+=('reattach-to-user-namespace' 'the_silver_searcher' 'zsh-completions' 'gnupg2' 'bat' 'exa' 'k9s' 'jq')
-  cat $DIRNAME/.aliases/osx $DIRNAME/.aliases/shared > $HOME/.aliases
+  cat $DIRNAME/.aliases/osx $DIRNAME/.aliases/shared >$HOME/.aliases
 else
   PACKAGE_MGR='sudo apt-get -y'
   # Requires Ubuntu > 13.10
   DEPENDENCIES+=('silversearcher-ag')
-  cat $DIRNAME/.aliases/linux $DIRNAME/.aliases/shared > $HOME/.aliases
+  cat $DIRNAME/.aliases/linux $DIRNAME/.aliases/shared >$HOME/.aliases
 fi
 
 echo -e "\033[0;34mInstalling dependencies...\033[0m"
 
 function check_dependency {
-  if [ $IS_MAC = 1 ]
-  then
-    brew list $1 >> /dev/null 2>&1
+  if [ $IS_MAC = 1 ]; then
+    brew list $1 >>/dev/null 2>&1
     test $? -eq 0
   else
-    sudo dpkg-query -L $1 >> /dev/null 2>&1
+    sudo dpkg-query -L $1 >>/dev/null 2>&1
   fi
 }
 
@@ -34,29 +32,35 @@ function install_dependency {
   check_dependency $1 || $PACKAGE_MGR install $1
 }
 
-for dependency in ${DEPENDENCIES[@]}
-do
+for dependency in ${DEPENDENCIES[@]}; do
   install_dependency $dependency
 done
 
 echo -e "\033[0;34mSetting up Vundle...\033[0m"
 
-if [ -d $HOME/.vim/bundle/Vundle.vim ]
-then
-  (cd $HOME/.vim/bundle/Vundle.vim; git pull -q)
+if [ -d $HOME/.vim/bundle/Vundle.vim ]; then
+  (
+    cd $HOME/.vim/bundle/Vundle.vim
+    git pull -q
+  )
 else
   git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 fi
 
-(cd $HOME; vim +PluginInstall +qall)
+(
+  cd $HOME
+  vim +PluginInstall +qall
+)
 
 echo -e "\033[0;34mSetting up fzf...\033[0m"
 
 mkdir -p $HOME/.shadowboxes $HOME/bin $HOME/man
 
-if [ -d $HOME/.shadowboxes/fzf ]
-then
-  (cd $HOME/.shadowboxes/fzf; git pull -q)
+if [ -d $HOME/.shadowboxes/fzf ]; then
+  (
+    cd $HOME/.shadowboxes/fzf
+    git pull -q
+  )
 else
   git clone https://github.com/junegunn/fzf.git $HOME/.shadowboxes/fzf
 fi
@@ -65,78 +69,101 @@ echo -e "\033[0;34mSetting up z...\033[0m"
 
 mkdir -p $HOME/.shadowboxes $HOME/bin $HOME/man
 
-if [ -d $HOME/.shadowboxes/z ]
-then
-  (cd $HOME/.shadowboxes/z; git pull -q)
+if [ -d $HOME/.shadowboxes/z ]; then
+  (
+    cd $HOME/.shadowboxes/z
+    git pull -q
+  )
 else
   git clone https://github.com/rupa/z.git $HOME/.shadowboxes/z
-  (cd $HOME/bin; ln -s $HOME/.shadowboxes/z/z.sh z.sh)
-  (cd $HOME/man; ln -s $HOME/.shadowboxes/z/z.1 z.1)
+  (
+    cd $HOME/bin
+    ln -s $HOME/.shadowboxes/z/z.sh z.sh
+  )
+  (
+    cd $HOME/man
+    ln -s $HOME/.shadowboxes/z/z.1 z.1
+  )
   touch $HOME/.z
   source $HOME/bin/z.sh
 fi
 
 echo -e "\033[0;34mSetting up n...\033[0m"
 
-if [ -d $HOME/.shadowboxes/n ]
-then
-  (cd $HOME/.shadowboxes/n; git pull -q)
+if [ -d $HOME/.shadowboxes/n ]; then
+  (
+    cd $HOME/.shadowboxes/n
+    git pull -q
+  )
 else
   git clone https://github.com/tj/n.git $HOME/.shadowboxes/n
-  (cd $HOME/.shadowboxes/n; PREFIX=$HOME make install)
+  (
+    cd $HOME/.shadowboxes/n
+    PREFIX=$HOME make install
+  )
 fi
 
 echo -e "\033[0;34mSetting up ruby-install...\033[0m"
 
-if [ -d $HOME/.shadowboxes/ruby-install ]
-then
-  (cd $HOME/.shadowboxes/ruby-install; git pull -q)
+if [ -d $HOME/.shadowboxes/ruby-install ]; then
+  (
+    cd $HOME/.shadowboxes/ruby-install
+    git pull -q
+  )
 else
   git clone https://github.com/postmodern/ruby-install.git $HOME/.shadowboxes/ruby-install
-  (cd $HOME/.shadowboxes/ruby-install; sudo make install)
+  (
+    cd $HOME/.shadowboxes/ruby-install
+    sudo make install
+  )
 fi
 
 echo -e "\033[0;34mSetting up chruby...\033[0m"
 
-if [ -d $HOME/.shadowboxes/chruby ]
-then
-  (cd $HOME/.shadowboxes/chruby; git pull -q)
+if [ -d $HOME/.shadowboxes/chruby ]; then
+  (
+    cd $HOME/.shadowboxes/chruby
+    git pull -q
+  )
 else
   git clone https://github.com/postmodern/chruby.git $HOME/.shadowboxes/chruby
-  (cd $HOME/.shadowboxes/chruby; sudo make install)
+  (
+    cd $HOME/.shadowboxes/chruby
+    sudo make install
+  )
 fi
 
 echo -e "\033[0;34mSetting up ix...\033[0m"
 
-if [ ! -f $HOME/bin/ix ]
-then
-  curl ix.io/client > $HOME/bin/ix
+if [ ! -f $HOME/bin/ix ]; then
+  curl ix.io/client >$HOME/bin/ix
   chmod +x $HOME/bin/ix
 fi
 
 rsync --exclude ".git/" \
-      --exclude ".DS_Store" \
-      --exclude ".aliases" \
-      --exclude ".fonts" \
-      --exclude "README.md" \
-      --exclude "ETC.md" \
-      --exclude "Dockerfile" \
-      --exclude "install" \
-      --exclude "setup" \
-      --exclude "vm" \
-      -av --no-perms -q "$(dirname $0)/" $HOME
+  --exclude ".DS_Store" \
+  --exclude ".aliases" \
+  --exclude ".fonts" \
+  --exclude "README.md" \
+  --exclude "ETC.md" \
+  --exclude "Dockerfile" \
+  --exclude "install" \
+  --exclude "setup" \
+  --exclude "vm" \
+  -av --no-perms -q "$(dirname $0)/" $HOME
 
 $HOME/.shadowboxes/fzf/install --all
 
-if [ $IS_MAC = 1 ]
-then
+if [ $IS_MAC = 1 ]; then
   echo -e "\033[0;34mSetting up fonts...\033[0m"
 
   cp .fonts/*.otf /Library/Fonts/
 
-  if [ -d $HOME/.shadowboxes/iTerm2-Color-Schemes ]
-  then
-    (cd $HOME/.shadowboxes/iTerm2-Color-Schemes; git pull -q)
+  if [ -d $HOME/.shadowboxes/iTerm2-Color-Schemes ]; then
+    (
+      cd $HOME/.shadowboxes/iTerm2-Color-Schemes
+      git pull -q
+    )
   else
     git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git $HOME/.shadowboxes/iTerm2-Color-Schemes
   fi
@@ -144,7 +171,7 @@ then
   CASKS=('1password' 'alfred' 'divvy' 'docker' 'google-chrome' 'iTerm2' 'licecap' 'spotify' 'superhuman' 'visual-studio-code')
 
   function check_cask {
-    brew list $1 >> /dev/null 2>&1
+    brew list $1 >>/dev/null 2>&1
     test $? -eq 0
   }
 
@@ -153,8 +180,7 @@ then
     check_cask $1 || brew install $1
   }
 
-  for cask in ${CASKS[@]}
-  do
+  for cask in ${CASKS[@]}; do
     install_cask $cask
   done
 fi
