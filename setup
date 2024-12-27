@@ -147,6 +147,7 @@ rsync --exclude ".git/" \
   --exclude "README.md" \
   --exclude "ETC.md" \
   --exclude "Dockerfile" \
+  --exclude "images" \
   --exclude "install" \
   --exclude "setup" \
   --exclude "vm" \
