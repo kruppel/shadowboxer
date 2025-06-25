@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 DIRNAME=$(dirname $0)
-DEPENDENCIES=('git' 'curl' 'zsh' 'tmux' 'vim' 'emacs' 'tree', 'ripgrep', 'ghostty')
+DEPENDENCIES=('git' 'curl' 'zsh' 'tmux' 'vim' 'emacs' 'tree', 'ripgrep', 'ghostty', 'atuin')
 
 [ $(uname -s) = 'Darwin' ] && IS_MAC=1 || IS_MAC=0
 

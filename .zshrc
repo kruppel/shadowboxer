@@ -61,3 +61,5 @@ bindkey "^S" history-incremental-pattern-search-forward
 . ~/.aliases
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+eval "$(atuin init zsh)"
