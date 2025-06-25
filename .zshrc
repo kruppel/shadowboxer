@@ -63,3 +63,4 @@ bindkey "^S" history-incremental-pattern-search-forward
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(atuin init zsh)"
+eval "$(zoxide init zsh)"
