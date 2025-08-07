@@ -7,7 +7,7 @@
 # IDE
 .vscode
 .aider*
-.claude
+.claude/settings.local.json
 CLAUDE.md
 
 # Development

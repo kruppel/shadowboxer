@@ -140,6 +140,34 @@ if [ ! -f $HOME/bin/termbin ]; then
   chmod +x $HOME/bin/termbin
 fi
 
+echo -e "\033[0;34mSetting up mise...\033[0m"
+
+if ! command -v mise &> /dev/null; then
+  if [ $IS_MAC = 1 ]; then
+    brew install mise
+  else
+    curl https://mise.run | sh
+  fi
+  eval "$(mise activate bash)"
+else
+  echo "mise is already installed"
+fi
+
+echo -e "\033[0;34mInstalling languages with mise...\033[0m"
+
+mise use --global node@latest
+mise use --global python@latest
+mise use --global ruby@latest
+mise use --global go@latest
+
+echo -e "\033[0;34mSetting up Claude Code...\033[0m"
+
+if ! command -v claude &> /dev/null; then
+  npm install -g @anthropic/claude-cli
+else
+  echo "Claude Code is already installed"
+fi
+
 rsync --exclude ".git/" \
   --exclude ".DS_Store" \
   --exclude ".aliases" \
