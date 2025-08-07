@@ -1,3 +1,5 @@
+alias ls="eza"
+alias cat="bat"
 alias bx="bundle exec"
 alias ll="ls -l"
 alias rake="noglob rake"
