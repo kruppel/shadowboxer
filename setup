@@ -160,16 +160,7 @@ if [ $IS_MAC = 1 ]; then
 
   cp .fonts/*.otf /Library/Fonts/
 
-  if [ -d $HOME/.shadowboxes/iTerm2-Color-Schemes ]; then
-    (
-      cd $HOME/.shadowboxes/iTerm2-Color-Schemes
-      git pull -q
-    )
-  else
-    git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git $HOME/.shadowboxes/iTerm2-Color-Schemes
-  fi
-
-  CASKS=('1password' 'alfred' 'divvy' 'docker' 'google-chrome' 'iTerm2' 'licecap' 'spotify' 'superhuman' 'visual-studio-code')
+  CASKS=('1password' 'alfred' 'divvy' 'docker' 'google-chrome' 'licecap' 'spotify' 'superhuman' 'visual-studio-code')
 
   function check_cask {
     brew list $1 >>/dev/null 2>&1
