@@ -135,9 +135,9 @@ fi
 
 echo -e "\033[0;34mSetting up ix...\033[0m"
 
-if [ ! -f $HOME/bin/ix ]; then
-  curl ix.io/client >$HOME/bin/ix
-  chmod +x $HOME/bin/ix
+if [ ! -f $HOME/bin/termbin ]; then
+  nc termbin.com 9999 >$HOME/bin/
+  chmod +x $HOME/bin/termbin
 fi
 
 rsync --exclude ".git/" \
