@@ -8,8 +8,9 @@
 .vscode
 .aider*
 .claude/settings.local.json
+.conductor
 CLAUDE.md
 
-# Development
+# Shadowboxer
 .shadowboxes
 vm/.vagrant
