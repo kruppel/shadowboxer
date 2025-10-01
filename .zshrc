@@ -1,12 +1,5 @@
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
-# chruby auto-switching
-if [[ -d /usr/local/share/chruby ]]
-then
-  . /usr/local/share/chruby/chruby.sh
-  . /usr/local/share/chruby/auto.sh
-fi
-
 [[ -h $HOME/bin/z.sh ]] && source $HOME/bin/z.sh
 
 SSH_KEY_FILE=$HOME/.ssh/id_rsa
