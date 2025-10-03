@@ -60,3 +60,6 @@ eval "$(atuin init zsh --disable-up-arrow)"
 
 # zoxide
 eval "$(zoxide init zsh)"
+
+# direnv
+eval "$(direnv hook zsh)"

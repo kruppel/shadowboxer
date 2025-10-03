@@ -1,6 +1,9 @@
 # MacOS
 .DS_Store
 
+# Environment
+.envrc
+
 # History
 .byebug_history
 
