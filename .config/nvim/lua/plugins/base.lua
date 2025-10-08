@@ -31,14 +31,9 @@ return {
   { "folke/trouble.nvim", enabled = false },
 
   -- override nvim-cmp and add cmp-emoji
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = { "hrsh7th/cmp-emoji" },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      table.insert(opts.sources, { name = "emoji" })
-    end,
-  },
+  { "saghen/blink.cmp", version = "*" }, -- or add build = "cargo build --release" if you want native fuzzy
+  { "hrsh7th/nvim-cmp", enabled = false },
+  { "hrsh7th/cmp-nvim-lsp", enabled = false },
 
   -- change some telescope options and a keymap to browse plugin files
   {
@@ -188,6 +183,7 @@ return {
         "shfmt",
         "flake8",
         "rubocop",
+        "sqlfluff",
       },
     },
   },
