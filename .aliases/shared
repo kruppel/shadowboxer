@@ -4,7 +4,7 @@ alias bx="bundle exec"
 alias ll="ls -l"
 alias rake="noglob rake"
 alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
-alias vi="vim"
+alias vi="nvim"
 
 # Docker related aliases
 docker-cid() {
