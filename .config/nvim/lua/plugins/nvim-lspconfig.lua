@@ -33,6 +33,18 @@ local function config()
     },
   })
 
+  lspconfig.basedpyright.setup({
+    capabilities = capabilities,
+    settings = {
+      basedpyright = {
+        analysis = {
+          typeCheckingMode = "standard",
+          diagnosticMode = "openFilesOnly",
+        },
+      },
+    },
+  })
+
   -- lspconfig.ruff.setup({
   --   cmd = { "ruff-lsp" },
   --   filetypes = { "python" },

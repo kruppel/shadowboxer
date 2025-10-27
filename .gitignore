@@ -12,7 +12,7 @@
 .aider*
 .claude/settings.local.json
 .conductor
-CLAUDE.md
+CLAUDE*.md
 
 # Shadowboxer
 .shadowboxes
