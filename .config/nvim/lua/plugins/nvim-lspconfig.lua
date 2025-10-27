@@ -21,7 +21,7 @@ local function config()
   })
 
   lspconfig.solargraph.setup({
-    cmd = { "chruby-exec", "3.3.5", "--", "solargraph", "stdio" },
+    cmd = { "mise", "x", "3.4.6", "--", "solargraph", "stdio" },
     filetypes = { "ruby" },
     init_options = {
       formatting = true,
@@ -45,11 +45,25 @@ local function config()
     },
   })
 
-  -- lspconfig.ruff.setup({
-  --   cmd = { "ruff-lsp" },
-  --   filetypes = { "python" },
-  --   root_dir = lspconfig.util.root_pattern("pyproject.toml", ".git"),
-  -- })
+  lspconfig.ruff.setup({
+    capabilities = capabilities,
+    init_options = {
+      settings = {},
+    },
+  })
+
+  -- Disable hover capability from Ruff since basedpyright handles it better
+  vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("lsp_attach_disable_ruff_hover", { clear = true }),
+    callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if client and client.name == "ruff" then
+        client.server_capabilities.hoverProvider = false
+      end
+    end,
+    desc = "LSP: Disable hover capability from Ruff",
+  })
+
   -- Language servers can be configured on a per-project basis using exrc.
   -- See the .nvim.lua file in .dotfiles for an example.
 end
