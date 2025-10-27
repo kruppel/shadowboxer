@@ -4,9 +4,8 @@ local function config()
   local servers = {
     lspconfig.bashls,
     lspconfig.eslint,
-    lspconfig.solargraph,
     lspconfig.rubocop,
-    -- lspconfig.ruby_lsp,
+    lspconfig.ruby_lsp,
     lspconfig.tsserver,
     -- lspconfig.ruff,
   }
@@ -18,19 +17,6 @@ local function config()
   lspconfig.rubocop.setup({
     cmd = { "bundle", "exec", "rubocop", "--lsp" },
     root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
-  })
-
-  lspconfig.solargraph.setup({
-    cmd = { "mise", "x", "3.4.6", "--", "solargraph", "stdio" },
-    filetypes = { "ruby" },
-    init_options = {
-      formatting = true,
-    },
-    settings = {
-      solargraph = {
-        diagnostics = true,
-      },
-    },
   })
 
   lspconfig.basedpyright.setup({
