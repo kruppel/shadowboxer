@@ -5,7 +5,7 @@ local function config()
     lspconfig.bashls,
     lspconfig.eslint,
     lspconfig.rubocop,
-    lspconfig.ruby_lsp,
+    -- lspconfig.ruby_lsp,
     lspconfig.tsserver,
     -- lspconfig.ruff,
   }
@@ -16,6 +16,13 @@ local function config()
 
   lspconfig.rubocop.setup({
     cmd = { "bundle", "exec", "rubocop", "--lsp" },
+    root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
+  })
+
+  lspconfig.ruby_lsp.setup({
+    cmd = { "mise", "x", "ruby@3.4.6", "--", "ruby-lsp" },
+    capabilities = capabilities,
+    filetypes = { "ruby" },
     root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
   })
 
