@@ -65,7 +65,10 @@ return {
   "neovim/nvim-lspconfig",
   config = config,
   dependencies = {
-    "saghen/blink.cmp",
+    {
+      "saghen/blink.cmp",
+      version = "1.*",
+    },
     "mason-org/mason-lspconfig.nvim",
   },
 }
