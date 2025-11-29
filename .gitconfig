@@ -22,6 +22,7 @@
   excludesfile = ~/.gitignore
 [alias]
   amend = commit --amend --no-edit
+  basebr = "!git rev-parse --abbrev-ref @{upstream} | sed 's@^.*/@@'"
   curr = symbolic-ref -q HEAD --short
   purr = pull --rebase
   main="!main() { if [ \"`git br -l main`\" ]; then echo 'main'; else echo 'master'; fi };main"
@@ -56,3 +57,6 @@
   extendRegexp = true
 [push]
   default = current
+  autoSetupRemote = true
+[init]
+  defaultBranch = main
