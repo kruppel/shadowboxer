@@ -29,10 +29,14 @@
 - Bias towards less verbose logging unless stated otherwise (i.e. stated purpose/goal is clear).
 - Do not add comments unless I've asked otherwise. Instead, at turn, share potential areas worth documenting based on complexity or need for additional context.
 
+### TypeScript/React
+
+- Naming convention for event callbacks: use `on${ActionName}` pattern (e.g. `onSubmit`, `onNewThing`, `onMouseEnter`).
+
 ### Ruby
 
 - Use an eigen class (`class << self`) when there are multiple class methods. Otherwise, prefer self.{method_name} for single class methods.
-
+- Prefer shorthand hash values where applicable (e.g. `{ key: }` instead of `{ key: key }`).
 
 ## Testing
 
