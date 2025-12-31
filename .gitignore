@@ -12,6 +12,7 @@
 .aider*
 .claude/settings.local.json
 .conductor
+AGENTS.md
 CLAUDE*.md
 
 # Shadowboxer
