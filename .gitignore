@@ -11,9 +11,18 @@
 .vscode
 .aider*
 .claude/settings.local.json
+
+# Agents
+.claude/*
+!.claude/CLAUDE.md
+!.claude/settings.json
+!.claude/agents/
+!.claude/agents/**
+!.claude/skills/
+!.claude/skills/**
+.codex/*
+!.codex/AGENTS.md
 .conductor
-AGENTS.md
-CLAUDE*.md
 
 # Shadowboxer
 .shadowboxes
