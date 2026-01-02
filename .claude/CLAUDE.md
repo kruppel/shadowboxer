@@ -42,3 +42,10 @@
 
 - Bias towards less tests, maximal coverage.
 - Test public interfaces, unless directed otherwise.
+
+## Dotfiles
+
+- This repo (`~/.shadowboxer`) is the version-controlled source for dotfiles.
+- Edits are made here, then copied to live configs (e.g., `~/.config/nvim/`).
+- Before copying to live, check if the live config differs from the repo version. If out of sync, show the diff and ask before proceeding.
+- To revert: copy from live config back to the repo, or use git to restore.
