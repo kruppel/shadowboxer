@@ -127,16 +127,6 @@ rsync --exclude ".git/" \
   --exclude "vm" \
   -av --no-perms -q "$(dirname $0)/" $HOME
 
-echo -e "\033[0;34mLinking Codex configuration...\033[0m"
-
-mkdir -p $HOME/.codex
-ln -snf $HOME/.claude/CLAUDE.md $HOME/.codex/AGENTS.md
-ln -snf $HOME/.claude/skills $HOME/.codex/skills
-
-if [ -f $HOME/.claude/settings.local.json ]; then
-  ln -snf $HOME/.claude/settings.local.json $HOME/.codex/settings.local.json
-fi
-
 $HOME/.shadowboxes/fzf/install --all
 
 if [ $IS_MAC = 1 ]; then
