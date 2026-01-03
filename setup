@@ -131,7 +131,6 @@ echo -e "\033[0;34mLinking Codex configuration...\033[0m"
 
 mkdir -p $HOME/.codex
 ln -snf $HOME/.claude/CLAUDE.md $HOME/.codex/AGENTS.md
-ln -snf $HOME/.claude/commands $HOME/.codex/commands
 ln -snf $HOME/.claude/skills $HOME/.codex/skills
 
 if [ -f $HOME/.claude/settings.local.json ]; then

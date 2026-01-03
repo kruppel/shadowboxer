@@ -23,9 +23,6 @@
 !.claude/skills/**
 .codex/*
 !.codex/AGENTS.md
-!.codex/commands
-!.codex/commands/
-!.codex/commands/**
 !.codex/skills
 !.codex/skills/
 !.codex/skills/**
