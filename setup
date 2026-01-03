@@ -100,6 +100,20 @@ else
   echo "Claude Code is already installed"
 fi
 
+echo -e "\033[0;34mSetting up Codex CLI...\033[0m"
+
+if ! command -v codex &>/dev/null; then
+  if command -v npm &>/dev/null; then
+    npm install -g @openai/codex
+  elif command -v mise &>/dev/null; then
+    mise x node@latest -- npm install -g @openai/codex
+  else
+    echo "npm is not available; skipping Codex CLI install"
+  fi
+else
+  echo "Codex CLI is already installed"
+fi
+
 rsync --exclude ".git/" \
   --exclude ".DS_Store" \
   --exclude ".aliases" \
@@ -112,6 +126,17 @@ rsync --exclude ".git/" \
   --exclude "setup" \
   --exclude "vm" \
   -av --no-perms -q "$(dirname $0)/" $HOME
+
+echo -e "\033[0;34mLinking Codex configuration...\033[0m"
+
+mkdir -p $HOME/.codex
+ln -snf $HOME/.claude/CLAUDE.md $HOME/.codex/AGENTS.md
+ln -snf $HOME/.claude/commands $HOME/.codex/commands
+ln -snf $HOME/.claude/skills $HOME/.codex/skills
+
+if [ -f $HOME/.claude/settings.local.json ]; then
+  ln -snf $HOME/.claude/settings.local.json $HOME/.codex/settings.local.json
+fi
 
 $HOME/.shadowboxes/fzf/install --all
 
