@@ -4,9 +4,22 @@
 
 - Do not use emojis unless explicitly requested.
 
+## Approved Tool Actions
+
+The following tool actions are pre-approved and do not require user confirmation:
+
+**Bash commands:**
+
+- `ls`, `mkdir`, `python`, `git commit`
+
+**Linear MCP:**
+
+- `list_projects`, `get_project`, `list_issues`, `query_data`, `create_issue`, `update_project`
+
 ## Workflow / Project Management
 
 - Store the Linear IDs for my user and team for faster calls in the future. I also want these to be used as defaults for team and assignment in the future. Default status should be triage.
+- Prefer using the Linear MCP (mcp__linear__*) over other Linear tools when both are available.
 
 ## Planning / Research
 
@@ -42,10 +55,3 @@
 
 - Bias towards less tests, maximal coverage.
 - Test public interfaces, unless directed otherwise.
-
-## Dotfiles
-
-- This repo (`~/.shadowboxer`) is the version-controlled source for dotfiles.
-- Edits are made here, then copied to live configs (e.g., `~/.config/nvim/`).
-- Before copying to live, check if the live config differs from the repo version. If out of sync, show the diff and ask before proceeding.
-- To revert: copy from live config back to the repo, or use git to restore.
