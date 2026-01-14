@@ -1,7 +1,7 @@
 alias ls="eza"
 alias cat="bat"
 alias bx="bundle exec"
-alias va="source .venv/bin/activate"
+alias va="uv venv --allow-existing && source .venv/bin/activate"
 alias ll="ls -l"
 alias rake="noglob rake"
 alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
