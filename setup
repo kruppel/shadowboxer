@@ -103,15 +103,36 @@ fi
 echo -e "\033[0;34mSetting up Codex CLI...\033[0m"
 
 if ! command -v codex &>/dev/null; then
-  if command -v npm &>/dev/null; then
-    npm install -g @openai/codex
-  elif command -v mise &>/dev/null; then
+  # Prefer mise-managed node: its global prefix is user-writable and shimmed,
+  # whereas a system npm may point at a root-owned prefix (install fails).
+  if command -v mise &>/dev/null; then
     mise x node@latest -- npm install -g @openai/codex
+    mise reshim
+  elif command -v npm &>/dev/null; then
+    npm install -g @openai/codex
   else
     echo "npm is not available; skipping Codex CLI install"
   fi
 else
   echo "Codex CLI is already installed"
+fi
+
+echo -e "\033[0;34mSetting up atuin and zoxide...\033[0m"
+
+if [ $IS_MAC = 0 ]; then
+  # macOS gets these via brew (DEPENDENCIES); on Linux atuin isn't in apt and
+  # zoxide lags, so use the upstream installers into ~/.local/bin (on PATH).
+  mkdir -p "$HOME/.local/bin"
+  if ! command -v zoxide &>/dev/null; then
+    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh \
+      | sh -s -- --bin-dir "$HOME/.local/bin"
+  fi
+  if ! command -v atuin &>/dev/null; then
+    curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+    for d in "$HOME/.atuin/bin" "$HOME/.cargo/bin"; do
+      [ -x "$d/atuin" ] && ln -sf "$d/atuin" "$HOME/.local/bin/atuin" && break
+    done
+  fi
 fi
 
 rsync --exclude ".git/" \
