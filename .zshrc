@@ -54,6 +54,11 @@ bindkey "^R" _history-incremental-preserving-pattern-search-backward
 bindkey -M isearch "^R" history-incremental-pattern-search-backward
 bindkey "^S" history-incremental-pattern-search-forward
 
+# vi keymap (from $EDITOR) binds backspace to vi-backward-delete-char, which
+# won't delete past where insert mode began. Restore normal backspace.
+bindkey '^?' backward-delete-char
+bindkey '^H' backward-delete-char
+
 . ~/.aliases
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
