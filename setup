@@ -143,6 +143,21 @@ if [ $IS_MAC = 0 ]; then
   fi
 fi
 
+echo -e "\033[0;34mSetting up eza and bat...\033[0m"
+
+if [ $IS_MAC = 0 ]; then
+  # macOS gets these via brew (DEPENDENCIES). On Linux: bat ships as `batcat`
+  # (symlink it back to `bat` for the alias), and eza isn't in apt so pull its
+  # upstream release binary into ~/.local/bin.
+  mkdir -p "$HOME/.local/bin"
+  command -v batcat &>/dev/null || sudo apt-get -y install bat
+  [ -x /usr/bin/batcat ] && ln -sf /usr/bin/batcat "$HOME/.local/bin/bat"
+  if ! command -v eza &>/dev/null; then
+    curl -fsSL https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz \
+      | tar xz -C "$HOME/.local/bin"
+  fi
+fi
+
 rsync --exclude ".git/" \
   --exclude ".DS_Store" \
   --exclude ".aliases" \
