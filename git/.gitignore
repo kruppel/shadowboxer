@@ -1,0 +1,33 @@
+# MacOS
+.DS_Store
+
+# Environment
+.envrc
+
+# History
+.byebug_history
+
+# IDE
+.vscode
+.aider*
+.claude/settings.local.json
+.codex/settings.local.json
+
+# Agents
+.claude/*
+!.claude/CLAUDE.md
+!.claude/settings.json
+!.claude/agents/
+!.claude/agents/**
+!.claude/skills/
+!.claude/skills/**
+.codex/*
+!.codex/AGENTS.md
+!.codex/skills
+!.codex/skills/
+!.codex/skills/**
+.conductor
+
+# Shadowboxer
+.shadowboxes
+vm/.vagrant
