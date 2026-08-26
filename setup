@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 DIRNAME=$(dirname $0)
-DEPENDENCIES=('git' 'curl' 'zsh' 'tmux' 'vim' 'neovim' 'emacs' 'tree', 'ripgrep', 'ghostty' 'neovim', 'direnv' 'gh')
+DEPENDENCIES=('git' 'curl' 'zsh' 'tmux' 'vim' 'neovim' 'emacs' 'tree' 'ripgrep' 'ghostty' 'direnv' 'gh' 'stow')
 
 [ $(uname -s) = 'Darwin' ] && IS_MAC=1 || IS_MAC=0
 
@@ -170,20 +170,17 @@ if [ $IS_MAC = 0 ]; then
   fi
 fi
 
-rsync --exclude ".git/" \
-  --exclude ".DS_Store" \
-  --exclude ".aliases" \
-  --exclude ".fonts" \
-  --exclude "README.md" \
-  --exclude "TROUBLESHOOTING.md" \
-  --exclude "Dockerfile" \
-  --exclude "images" \
-  --exclude "install" \
-  --exclude "setup" \
-  --exclude "vm" \
-  -av --no-perms -q "$(dirname $0)/" $HOME
+echo -e "\033[0;34mStowing dotfiles...\033[0m"
 
-$HOME/.shadowboxes/fzf/install --all
+PACKAGES=('claude' 'codex' 'config' 'emacs' 'git' 'mcp' 'nvim' 'ruby' 'tmux' 'vim' 'zsh')
+
+stow --dir="$DIRNAME" --target="$HOME" --restow "${PACKAGES[@]}"
+
+# .codex/skills targets Claude's skills dir, which is runtime content in $HOME
+# (not tracked here), so it can't be stowed; link it explicitly.
+ln -sfn "$HOME/.claude/skills" "$HOME/.codex/skills"
+
+$HOME/.shadowboxes/fzf/install --bin --key-bindings --completion
 
 if [ $IS_MAC = 1 ]; then
   echo -e "\033[0;34mSetting up fonts...\033[0m"
