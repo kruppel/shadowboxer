@@ -5,12 +5,12 @@
 .agents/
 
 # Runtime state written through stow links
-.vim/bundle/
-.vim/_backup/*
-!.vim/_backup/.gitkeep
-.vim/_temp/*
-!.vim/_temp/.gitkeep
-.zsh/history
+vim/.vim/bundle/
+vim/.vim/_backup/*
+!vim/.vim/_backup/.gitkeep
+vim/.vim/_temp/*
+!vim/.vim/_temp/.gitkeep
+zsh/.zsh/history
 
 # Guard against runtime leakage into packages (e.g. tree folding on fresh machines)
 claude/.claude/*
