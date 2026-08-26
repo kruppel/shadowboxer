@@ -17,3 +17,8 @@ claude/.claude/*
 !claude/.claude/CLAUDE.md
 codex/.codex/*
 !codex/.codex/AGENTS.md
+config/.config/opencode/node_modules/
+config/.config/opencode/package.json
+config/.config/opencode/package-lock.json
+config/.config/opencode/bun.lock
+config/.config/opencode/.gitignore
