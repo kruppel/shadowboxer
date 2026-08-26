@@ -71,3 +71,5 @@ eval "$(zoxide init zsh)"
 
 # direnv
 eval "$(direnv hook zsh)"
+
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
