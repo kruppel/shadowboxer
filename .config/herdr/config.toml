@@ -1,0 +1,47 @@
+# herdr configuration — keybindings mirror ~/.tmux.conf
+#
+# Only bindings that differ from herdr's defaults are listed. Setting a binding
+# here replaces herdr's default for that action, and a key claimed by two
+# actions silently disables one of them, so every default this file displaces
+# is given a new home below.
+
+[keys]
+# use C-a, since it's on the home row and easier to hit than C-b
+prefix = "ctrl+a"
+
+# tmux binds detach to C-a d, which frees C-a q for the pane picker
+detach = "prefix+d"
+
+# tmux: bind-key q display-panes. herdr's navigator is the nearest thing.
+goto = ["prefix+q", "prefix+g"]
+
+# tmux: bind-key a last-pane
+last_pane = "prefix+a"
+
+# tmux: bind-key s split-window -v (stacked panes).
+# split_vertical stays on prefix+v to match bind-key v split-window -h.
+split_horizontal = ["prefix+s", "prefix+minus"]
+
+# tmux: space/t next-window, bspace/T previous-window
+next_tab = ["prefix+t", "prefix+space", "prefix+n"]
+previous_tab = ["prefix+shift+t", "prefix+backspace", "prefix+p"]
+
+# tmux: bind-key C-x kill-window
+close_tab = ["prefix+ctrl+x", "prefix+shift+x"]
+
+# displaced defaults: rename_tab off prefix+shift+t (tmux uses , for
+# rename-window), settings off prefix+s to free it for the split
+rename_tab = "prefix+comma"
+settings = "prefix+shift+s"
+
+# Already matching ~/.tmux.conf by default, listed for reference only:
+#   prefix+v          split side by side       (tmux v)
+#   prefix+h/j/k/l    focus pane               (tmux h/j/k/l)
+#   prefix+c          new tab                  (tmux c)
+#   prefix+1..9       switch tab               (tmux base-index 1)
+#   prefix+x          close pane               (tmux x)
+#   prefix+z          zoom pane                (tmux z)
+#   prefix+[          copy mode, vi motions    (tmux [ and mode-keys vi)
+#   prefix+shift+r    reload config            (tmux R)
+#   ctrl+a ctrl+a     send a literal C-a       (tmux send-prefix)
+# Mouse support (tmux: set -g mouse on) is on by default.

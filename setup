@@ -125,6 +125,18 @@ else
   echo "Codex CLI is already installed"
 fi
 
+echo -e "\033[0;34mSetting up herdr...\033[0m"
+
+if ! command -v herdr &>/dev/null; then
+  # Use herdr's own installer rather than brew on both platforms: it drops a
+  # single binary in ~/.local/bin, which precedes brew on PATH (see .zshrc), so
+  # a brew-managed copy would be shadowed. This also keeps `herdr update` able
+  # to replace the binary in place.
+  curl -fsSL https://herdr.dev/install.sh | sh
+else
+  echo "herdr is already installed"
+fi
+
 echo -e "\033[0;34mSetting up atuin and zoxide...\033[0m"
 
 if [ $IS_MAC = 0 ]; then
