@@ -4,18 +4,6 @@
 
 - Do not use emojis unless explicitly requested.
 
-## Approved Tool Actions
-
-The following tool actions are pre-approved and do not require user confirmation:
-
-**Bash commands:**
-
-- `ls`, `mkdir`, `python`, `git commit`
-
-**Linear MCP:**
-
-- `list_projects`, `get_project`, `list_issues`, `query_data`, `create_issue`, `update_project`
-
 ## Workflow / Project Management
 
 - Store the Linear IDs for my user and team for faster calls in the future. I also want these to be used as defaults for team and assignment in the future. Default status should be triage.
