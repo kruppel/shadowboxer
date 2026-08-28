@@ -1,9 +1,6 @@
 # macOS
 .DS_Store
 
-# Agent plans (kept local)
-.agents/
-
 # Runtime state written through stow links
 vim/.vim/bundle/
 vim/.vim/_backup/*

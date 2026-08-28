@@ -172,9 +172,13 @@ fi
 
 echo -e "\033[0;34mStowing dotfiles...\033[0m"
 
-PACKAGES=('claude' 'codex' 'config' 'emacs' 'git' 'mcp' 'nvim' 'ruby' 'tmux' 'vim' 'zsh')
+PACKAGES=('agents' 'claude' 'codex' 'config' 'emacs' 'git' 'mcp' 'nvim' 'ruby' 'tmux' 'vim' 'zsh')
 
 stow --dir="$DIRNAME" --target="$HOME" --restow "${PACKAGES[@]}"
+
+# Keep Claude's instructions pointed at the shared agent instructions after
+# stowing the packages into the home directory.
+ln -sfn "$HOME/.agents/AGENTS.md" "$HOME/.claude/CLAUDE.md"
 
 # .codex/skills targets Claude's skills dir, which is runtime content in $HOME
 # (not tracked here), so it can't be stowed; link it explicitly.
