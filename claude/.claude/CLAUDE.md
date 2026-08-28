@@ -11,7 +11,7 @@
 
 ## Planning / Research
 
-- Store/write all plans related to research/planning locally in a .claude/plans folder.
+- Store/write all plans related to research/planning locally in a .agents/plans folder.
 - Use Mermaid syntax for flow charts, data models, and other diagrams.
 
 ## Dependencies / Scripts
