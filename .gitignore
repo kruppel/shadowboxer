@@ -1,33 +1,24 @@
-# MacOS
+# macOS
 .DS_Store
 
-# Environment
-.envrc
+# Agent plans (kept local)
+.agents/
 
-# History
-.byebug_history
+# Runtime state written through stow links
+vim/.vim/bundle/
+vim/.vim/_backup/*
+!vim/.vim/_backup/.gitkeep
+vim/.vim/_temp/*
+!vim/.vim/_temp/.gitkeep
+zsh/.zsh/history
 
-# IDE
-.vscode
-.aider*
-.claude/settings.local.json
-.codex/settings.local.json
-
-# Agents
-.claude/*
-!.claude/CLAUDE.md
-!.claude/settings.json
-!.claude/agents/
-!.claude/agents/**
-!.claude/skills/
-!.claude/skills/**
-.codex/*
-!.codex/AGENTS.md
-!.codex/skills
-!.codex/skills/
-!.codex/skills/**
-.conductor
-
-# Shadowboxer
-.shadowboxes
-vm/.vagrant
+# Guard against runtime leakage into packages (e.g. tree folding on fresh machines)
+claude/.claude/*
+!claude/.claude/CLAUDE.md
+codex/.codex/*
+!codex/.codex/AGENTS.md
+config/.config/opencode/node_modules/
+config/.config/opencode/package.json
+config/.config/opencode/package-lock.json
+config/.config/opencode/bun.lock
+config/.config/opencode/.gitignore
