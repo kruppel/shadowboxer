@@ -18,4 +18,3 @@ codex/.codex/*
 !codex/.codex/AGENTS.md
 config/.config/opencode/node_modules/
 config/.config/opencode/bun.lock
-config/.config/opencode/.gitignore

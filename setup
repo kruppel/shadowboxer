@@ -25,3 +25,15 @@ if [ -L "$HOME/.codex/AGENTS.md" ] && [ "$(readlink "$HOME/.codex/AGENTS.md")" =
 fi
 
 stow --dir="$DIRNAME" --target="$HOME" --restow "${PACKAGES[@]}"
+
+OPENCODE_DIR="$HOME/.config/opencode"
+for file in package.json package-lock.json; do
+  target="$OPENCODE_DIR/$file"
+  source="$DIRNAME/config/.config/opencode/$file"
+  if [ -f "$target" ] && [ ! -L "$target" ]; then
+    backup="$target.local"
+    [ -e "$backup" ] && backup="$target.$(date +%Y%m%d%H%M%S).local"
+    mv "$target" "$backup"
+  fi
+  ln -sfn "$source" "$target"
+done

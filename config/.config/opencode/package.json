@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@firecrawl/anydoc": "^0.2.4",
+    "@firecrawl/pdf-inspector": "^1.17.0",
+    "@opencode-ai/plugin": "^1.18.25"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0"
+  }
+}
