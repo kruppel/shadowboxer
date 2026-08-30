@@ -51,7 +51,6 @@
   # Show files ignored by git:
   ign = ls-files -o -i --exclude-standard
 [user]
-  name = Kurt Ruppel
   useConfigOnly = true
 [grep]
   extendRegexp = true

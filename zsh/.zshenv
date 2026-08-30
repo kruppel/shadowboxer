@@ -19,3 +19,5 @@ export GOPATH=$HOME/.go
 export _Z_NO_RESOLVE_SYMLINKS=1
 
 export XDG_CONFIG_HOME=$HOME/.config
+
+[ -f "$HOME/.zshenv.local" ] && source "$HOME/.zshenv.local"

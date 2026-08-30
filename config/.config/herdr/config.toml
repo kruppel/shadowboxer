@@ -45,3 +45,9 @@ settings = "prefix+shift+s"
 #   prefix+shift+r    reload config            (tmux R)
 #   ctrl+a ctrl+a     send a literal C-a       (tmux send-prefix)
 # Mouse support (tmux: set -g mouse on) is on by default.
+
+onboarding = false
+
+[theme]
+name = "kanagawa"
+auto_switch = false

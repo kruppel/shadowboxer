@@ -1,8 +1,5 @@
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
-# mise — runtime version manager (node/python/ruby/go + global tool shims)
-command -v mise &>/dev/null && eval "$(mise activate zsh)"
-
 [[ -h $HOME/bin/z.sh ]] && source $HOME/bin/z.sh
 
 SSH_KEY_FILE=$HOME/.ssh/id_rsa

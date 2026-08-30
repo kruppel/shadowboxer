@@ -1,209 +1,27 @@
 #!/usr/bin/env bash
 
-DIRNAME=$(dirname $0)
-DEPENDENCIES=('git' 'curl' 'zsh' 'tmux' 'vim' 'neovim' 'emacs' 'tree' 'ripgrep' 'ghostty' 'direnv' 'gh' 'stow')
+set -euo pipefail
 
-[ $(uname -s) = 'Darwin' ] && IS_MAC=1 || IS_MAC=0
+DIRNAME=$(cd "$(dirname "$0")" && pwd)
+PACKAGES=('agents' 'claude' 'codex' 'config' 'emacs' 'git' 'nvim' 'ruby' 'tmux' 'vim' 'zsh')
 
-if [ $IS_MAC = 1 ]; then
-  PACKAGE_MGR='brew'
-  DEPENDENCIES+=('reattach-to-user-namespace' 'the_silver_searcher' 'zsh-completions' 'gnupg2' 'bat' 'eza' 'k9s' 'jq' 'atuin' 'zoxide')
-  cat $DIRNAME/.aliases/osx $DIRNAME/.aliases/shared >$HOME/.aliases
+if ! command -v stow >/dev/null 2>&1; then
+  echo "stow is required; install it separately, then rerun ./setup" >&2
+  exit 1
+fi
+
+echo "Restowing dotfiles..."
+if [ "$(uname -s)" = "Darwin" ]; then
+  cat "$DIRNAME/.aliases/osx" "$DIRNAME/.aliases/shared" > "$HOME/.aliases"
 else
-  PACKAGE_MGR='sudo apt-get -y'
-  # Requires Ubuntu > 13.10
-  DEPENDENCIES+=('silversearcher-ag')
-  cat $DIRNAME/.aliases/linux $DIRNAME/.aliases/shared >$HOME/.aliases
+  cat "$DIRNAME/.aliases/linux" "$DIRNAME/.aliases/shared" > "$HOME/.aliases"
 fi
 
-echo -e "\033[0;34mInstalling dependencies...\033[0m"
-
-function check_dependency {
-  if [ $IS_MAC = 1 ]; then
-    brew list $1 >>/dev/null 2>&1
-    test $? -eq 0
-  else
-    sudo dpkg-query -L $1 >>/dev/null 2>&1
-  fi
-}
-
-function install_dependency {
-  echo -e "\033[0;34mInstalling $1...\033[0m"
-  check_dependency $1 || $PACKAGE_MGR install $1
-}
-
-for dependency in ${DEPENDENCIES[@]}; do
-  install_dependency $dependency
-done
-
-echo -e "\033[0;34mSetting up Vundle...\033[0m"
-
-if [ -d $HOME/.vim/bundle/Vundle.vim ]; then
-  (
-    cd $HOME/.vim/bundle/Vundle.vim
-    git pull -q
-  )
-else
-  git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+if [ -L "$HOME/.claude/CLAUDE.md" ] && [ "$(readlink "$HOME/.claude/CLAUDE.md")" = "$HOME/.agents/AGENTS.md" ]; then
+  unlink "$HOME/.claude/CLAUDE.md"
 fi
-
-(
-  cd $HOME
-  vim +PluginInstall +qall
-)
-
-echo -e "\033[0;34mSetting up fzf...\033[0m"
-
-mkdir -p $HOME/.shadowboxes $HOME/bin $HOME/man
-
-if [ -d $HOME/.shadowboxes/fzf ]; then
-  (
-    cd $HOME/.shadowboxes/fzf
-    git pull -q
-  )
-else
-  git clone https://github.com/junegunn/fzf.git $HOME/.shadowboxes/fzf
+if [ -L "$HOME/.codex/AGENTS.md" ] && [ "$(readlink "$HOME/.codex/AGENTS.md")" = "$HOME/.claude/CLAUDE.md" ]; then
+  unlink "$HOME/.codex/AGENTS.md"
 fi
-
-echo -e "\033[0;34mSetting up termbin...\033[0m"
-
-if [ ! -f $HOME/bin/termbin ]; then
-  nc termbin.com 9999 >$HOME/bin/
-  chmod +x $HOME/bin/termbin
-fi
-
-echo -e "\033[0;34mSetting up mise...\033[0m"
-
-if ! command -v mise &>/dev/null; then
-  if [ $IS_MAC = 1 ]; then
-    brew install mise
-  else
-    curl https://mise.run | sh
-  fi
-  eval "$(mise activate bash)"
-else
-  echo "mise is already installed"
-fi
-
-# mise compiles Ruby from source via ruby-build, which needs these system
-# libraries on Linux (macOS pulls them from the toolchain/brew).
-if [ $IS_MAC = 0 ]; then
-  sudo apt-get -y install autoconf patch build-essential libssl-dev libyaml-dev \
-    libreadline-dev zlib1g-dev libgmp-dev libncurses-dev libffi-dev libgdbm-dev \
-    libdb-dev uuid-dev
-fi
-
-echo -e "\033[0;34mInstalling languages with mise...\033[0m"
-
-mise use --global node@latest
-mise use --global python@latest
-mise use --global ruby@latest
-mise use --global go@latest
-
-echo -e "\033[0;34mSetting up Claude Code...\033[0m"
-
-if ! command -v claude &>/dev/null; then
-  curl -fsSL https://claude.ai/install.sh | bash
-else
-  echo "Claude Code is already installed"
-fi
-
-echo -e "\033[0;34mSetting up Codex CLI...\033[0m"
-
-if ! command -v codex &>/dev/null; then
-  # Prefer mise-managed node: its global prefix is user-writable and shimmed,
-  # whereas a system npm may point at a root-owned prefix (install fails).
-  if command -v mise &>/dev/null; then
-    mise x node@latest -- npm install -g @openai/codex
-    mise reshim
-  elif command -v npm &>/dev/null; then
-    npm install -g @openai/codex
-  else
-    echo "npm is not available; skipping Codex CLI install"
-  fi
-else
-  echo "Codex CLI is already installed"
-fi
-
-echo -e "\033[0;34mSetting up herdr...\033[0m"
-
-if ! command -v herdr &>/dev/null; then
-  # Use herdr's own installer rather than brew on both platforms: it drops a
-  # single binary in ~/.local/bin, which precedes brew on PATH (see .zshrc), so
-  # a brew-managed copy would be shadowed. This also keeps `herdr update` able
-  # to replace the binary in place.
-  curl -fsSL https://herdr.dev/install.sh | sh
-else
-  echo "herdr is already installed"
-fi
-
-echo -e "\033[0;34mSetting up atuin and zoxide...\033[0m"
-
-if [ $IS_MAC = 0 ]; then
-  # macOS gets these via brew (DEPENDENCIES); on Linux atuin isn't in apt and
-  # zoxide lags, so use the upstream installers into ~/.local/bin (on PATH).
-  mkdir -p "$HOME/.local/bin"
-  if ! command -v zoxide &>/dev/null; then
-    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh \
-      | sh -s -- --bin-dir "$HOME/.local/bin"
-  fi
-  if ! command -v atuin &>/dev/null; then
-    curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
-    for d in "$HOME/.atuin/bin" "$HOME/.cargo/bin"; do
-      [ -x "$d/atuin" ] && ln -sf "$d/atuin" "$HOME/.local/bin/atuin" && break
-    done
-  fi
-fi
-
-echo -e "\033[0;34mSetting up eza and bat...\033[0m"
-
-if [ $IS_MAC = 0 ]; then
-  # macOS gets these via brew (DEPENDENCIES). On Linux: bat ships as `batcat`
-  # (symlink it back to `bat` for the alias), and eza isn't in apt so pull its
-  # upstream release binary into ~/.local/bin.
-  mkdir -p "$HOME/.local/bin"
-  command -v batcat &>/dev/null || sudo apt-get -y install bat
-  [ -x /usr/bin/batcat ] && ln -sf /usr/bin/batcat "$HOME/.local/bin/bat"
-  if ! command -v eza &>/dev/null; then
-    curl -fsSL https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz \
-      | tar xz -C "$HOME/.local/bin"
-  fi
-fi
-
-echo -e "\033[0;34mStowing dotfiles...\033[0m"
-
-PACKAGES=('agents' 'claude' 'codex' 'config' 'emacs' 'git' 'mcp' 'nvim' 'ruby' 'tmux' 'vim' 'zsh')
 
 stow --dir="$DIRNAME" --target="$HOME" --restow "${PACKAGES[@]}"
-
-# Keep Claude's instructions pointed at the shared agent instructions after
-# stowing the packages into the home directory.
-ln -sfn "$HOME/.agents/AGENTS.md" "$HOME/.claude/CLAUDE.md"
-
-# .codex/skills targets Claude's skills dir, which is runtime content in $HOME
-# (not tracked here), so it can't be stowed; link it explicitly.
-ln -sfn "$HOME/.claude/skills" "$HOME/.codex/skills"
-
-$HOME/.shadowboxes/fzf/install --bin --key-bindings --completion
-
-if [ $IS_MAC = 1 ]; then
-  echo -e "\033[0;34mSetting up fonts...\033[0m"
-
-  cp .fonts/*.otf /Library/Fonts/
-
-  CASKS=('1password' 'alfred' 'divvy' 'docker' 'google-chrome' 'licecap' 'spotify' 'superhuman' 'visual-studio-code')
-
-  function check_cask {
-    brew list $1 >>/dev/null 2>&1
-    test $? -eq 0
-  }
-
-  function install_cask {
-    echo -e "\033[0;34mInstalling $1...\033[0m"
-    check_cask $1 || brew install $1
-  }
-
-  for cask in ${CASKS[@]}; do
-    install_cask $cask
-  done
-fi
