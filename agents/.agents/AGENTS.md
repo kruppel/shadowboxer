@@ -41,6 +41,7 @@ The following tool actions are pre-approved and do not require user confirmation
 
 ## Planning / Research
 
+- Install new agent skills in `~/.agents/skills`; do not add them to `~/.claude/skills` or `~/.config/opencode/skills`.
 - Store/write all plans related to research/planning locally in a `.agents/plans` folder.
 - Use Mermaid syntax for flow charts, data models, and other diagrams.
 - When designing a new contract or interface (API shapes, agent UX like option selection), first research how established products solve it (e.g. Claude Code, Codex, opencode, pi) and prefer the shape they converge on. Verify with current docs/source, not memory.
