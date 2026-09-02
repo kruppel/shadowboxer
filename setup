@@ -3,7 +3,7 @@
 set -euo pipefail
 
 DIRNAME=$(cd "$(dirname "$0")" && pwd)
-PACKAGES=('agents' 'claude' 'codex' 'config' 'emacs' 'git' 'nvim' 'ruby' 'tmux' 'vim' 'zsh')
+PACKAGES=('agents' 'claude' 'codex' 'config' 'emacs' 'git' 'ruby' 'tmux' 'vim' 'zsh')
 
 if ! command -v stow >/dev/null 2>&1; then
   echo "stow is required; install it separately, then rerun ./setup" >&2
