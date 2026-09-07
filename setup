@@ -6,7 +6,14 @@ DIRNAME=$(cd "$(dirname "$0")" && pwd)
 PACKAGES=('agents' 'claude' 'codex' 'config' 'emacs' 'git' 'ruby' 'tmux' 'vim' 'zsh')
 
 if ! command -v stow >/dev/null 2>&1; then
-  echo "stow is required; install it separately, then rerun ./setup" >&2
+  echo "GNU Stow 2.4.0 or newer is required; see TROUBLESHOOTING.md, then rerun ./setup" >&2
+  exit 1
+fi
+
+STOW_VERSION=$(stow --version | awk 'NR == 1 { print $NF }')
+if [[ ! "$STOW_VERSION" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]] ||
+  (( BASH_REMATCH[1] < 2 || (BASH_REMATCH[1] == 2 && BASH_REMATCH[2] < 4) )); then
+  echo "GNU Stow 2.4.0 or newer is required (found $STOW_VERSION); see TROUBLESHOOTING.md, then rerun ./setup" >&2
   exit 1
 fi
 
