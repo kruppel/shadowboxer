@@ -5,6 +5,8 @@
 # actions silently disables one of them, so every default this file displaces
 # is given a new home below.
 
+onboarding = false
+
 [keys]
 # use C-a, since it's on the home row and easier to hit than C-b
 prefix = "ctrl+a"
@@ -46,8 +48,9 @@ settings = "prefix+shift+s"
 #   ctrl+a ctrl+a     send a literal C-a       (tmux send-prefix)
 # Mouse support (tmux: set -g mouse on) is on by default.
 
-onboarding = false
-
 [theme]
 name = "kanagawa"
 auto_switch = false
+
+[ui]
+agent_panel_sort = "priority"
