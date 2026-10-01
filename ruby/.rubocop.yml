@@ -1,0 +1,8 @@
+require:
+  - ./.rubocop/cop/layout/empty_lines_around_control_flow.rb
+
+Layout/EmptyLineAfterGuardClause:
+  Enabled: true
+
+Layout/EmptyLinesAroundControlFlow:
+  Enabled: true
