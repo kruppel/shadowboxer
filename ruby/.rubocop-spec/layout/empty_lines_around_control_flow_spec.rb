@@ -29,6 +29,28 @@ RSpec.describe RuboCop::Cop::Layout::EmptyLinesAroundControlFlow, :config do
     RUBY
   end
 
+  it 'autocorrects missing blank lines before and after standalone control flow' do
+    expect_offense(<<~RUBY)
+      prepare
+      if condition
+      ^^^^^^^^^^^^ Add an empty line around this control-flow block.
+        work
+      end
+      finish
+      ^^^^^^ Add an empty line around this control-flow block.
+    RUBY
+
+    expect_correction(<<~RUBY)
+      prepare
+
+      if condition
+        work
+      end
+
+      finish
+    RUBY
+  end
+
   it 'checks each supported block form' do
     [
       "if condition\n  work\nend",

@@ -4,6 +4,8 @@ module RuboCop
   module Cop
     module Layout
       class EmptyLinesAroundControlFlow < Base
+        extend AutoCorrector
+
         MSG = 'Add an empty line around this control-flow block.'
         CONTROL_FLOW_TYPES = %i[case for if unless until while].freeze
 
@@ -23,7 +25,13 @@ module RuboCop
             next unless control_flow_block?(previous) || control_flow_block?(current)
             next if blank_line_between?(previous, current)
 
-            add_offense(current, message: MSG)
+            add_offense(current, message: MSG) do |corrector|
+              expression = current.loc.expression
+              line_start = expression.source_buffer.line_range(expression.line).resize(0)
+              newline = expression.source_buffer.source.include?("\r\n") ? "\r\n" : "\n"
+
+              corrector.insert_before(line_start, newline)
+            end
           end
         end
 
